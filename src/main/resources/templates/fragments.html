@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragments</title>
+    <th:block th:fragment="base-css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" th:inline="text" href="../static/css/base-css.css" th:href="@{css/base-css.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </th:block>
+</head>
+
+<body>
+    <th:block th:fragment="base-navigation">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#">
+                    <img src="../static/images/logo.jpg" th:src="@{images/logo.jpg}" width="90" height="90" alt="">
+
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav justify-content-end font-medium">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">TRANG CHỦ <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">GIỚI THIỆU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">SẢN PHẨM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">TIN TỨC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ĐỐI TÁC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LIÊN HỆ</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </th:block>
+    <th:block th:fragment="base-footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 thong-tin-chung font-medium">
+                        <p style="font-size: 13px; border-bottom:3px solid white; display: inline-block;">THÔNG TIN
+                            CHUNG</p>
+                        <h5 class="font-medium">CÔNG TY THHH HOÀNG NAM</h5>
+                        <ul style="margin-top: 20px; list-style: none; font-size: 12px;" class="font-thin">
+                            <li><i class="fas fa-mobile-alt"></i> 099999999</li>
+                            <li><i class="far fa-envelope"></i> cskh@hoangnam.vn</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Số 1 Nguyễn Trãi Thanh Xuân Hà Nội</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 ve-chung-toi font-medium">
+                        <p style="font-size: 13px; border-bottom:3px solid white; display: inline-block;">VỀ CHÚNG TÔI
+                        </p>
+                        <ul style=" list-style: none; font-size: 12px;" class="font-thin">
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Sản phẩm</a></li>
+                            <li><a href="#">Tin tức</a></li>
+                            <li><a href="#">Đối tác</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 connect-with-us font-medium">
+                        <p style="font-size: 13px; border-bottom:3px solid white; display: inline-block;">KẾT NỐI VỚI
+                            CHÚNG TÔI</p>
+                        <br>
+                        <a href="#" style="font-size: 30px;"><i class="fab fa-facebook-square"></i></a>&nbsp;&nbsp;<a
+                            href="#" style="font-size: 30px;"><i class="fab fa-twitter"></i></a>
+                        &nbsp;&nbsp;<a href="#" style="font-size: 30px;"><i class="fas fa-envelope"></i></a>
+                        <br>
+                        <img style="margin-top: 20px;" height="40px" src="../static/images/bo-cong-thuong.png" th:src = "@{/images/bo-cong-thuong.png}" alt="Đã thông báo - Bộ Công Thương">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </th:block>
+    <th:block th:fragment="base-js">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        <script>
+            $(window).resize(() => {
+                if ($(window).width() < 768) {
+                    $("footer div div div.font-medium").addClass("justify-content-center");
+                } else {
+                    $("footer div div div.font-medium").removeClass("justify-content-center");
+                }
+            }).resize();
+        </script>
+    </th:block>
+</body>
+
+</html>
