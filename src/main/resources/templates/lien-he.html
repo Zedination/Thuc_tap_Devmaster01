@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:utext="${title}"></title>
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <link rel="stylesheet" href="../static/css/gioi-thieu.css" th:href="@{css/gioi-thieu.css}">
+    <link rel="stylesheet" href="../static/css/lien-he.css" th:href="@{css/lien-he.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+    <section class="banner">
+        <img height="200rem" src="../static/images/LOGO-BANNER-GIOITHIEU.png" alt=""
+            th:src="@{images/LOGO-BANNER-GIOITHIEU.png}">
+    </section>
+    <div style="background-color: #f3f3f3;">
+        <div class="container content">
+            <div class="row">
+                <div class="col-lg-6" style="padding-left: 40px;">
+                    <img src="../static/images/LIENHE-img-content.png" th:src = "@{images/LIENHE-img-content.png}" alt="">
+                </div>
+                <form style="margin-bottom: 50px;" class="col-lg-6" action="#">
+                    <p style="font-size: 22px; color: #bd945f;" class="font-ultra">LIÊN HỆ VỚI CHÚNG TÔI</p>
+                    <input type="text" class="form-control font-medium" id="hoten" name = "hoten" placeholder="Họ tên" required>
+                    <input type="email" class="form-control font-medium" id="email" name = "email" placeholder="Email" required>
+                    <input type="tel" class="form-control font-medium" id="sodienthoai" name = "sodienthoai" placeholder="Số điện thoại" required>
+                    <input type="text" class="form-control font-medium" id="noidung" name = "noidung" placeholder="Nội dung" required>
+                    <button class="font-medium" type="submit">Gửi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <th:block th:insert="~{fragments :: base-footer}"></th:block>
+    <th:block th:insert="~{fragments :: base-js}"></th:block>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+form input{
+    border: 3px solid #bd945f !important;
+    font-size: 14px !important;
+    height: 60px !important;
+    width: 90% !important;
+    border-radius: 0px !important;
+    margin-bottom: 20px;
+}
+form input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+form button{
+    border: 3px solid #bd945f;
+    font-size: 14px !important;
+    height: 60px !important;
+    width: 20% !important;
+    border-radius: 0px !important;
+    margin-bottom: 20px;
+    background-color: #bd945f;
+}
+form button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #bd945f;
+}
+@media only screen and (max-width: 992px){
+    .content .row div{
+        display: none;
+    }
+    form p{
+        text-align: center;
+    }
+    form input{
+        width: 100% !important;
+    }
+    form{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    form button{
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    body > div:nth-child(3) > div > div > form > input:nth-child(5){
+        margin-bottom: 80px;
+    }
+}

@@ -14,4 +14,8 @@ public class BaseController {
 	public String get_gioi_thieu() {
 		return "gioi-thieu";
 	}
+	@GetMapping("/lien-he")
+	public String get_lien_he() {
+		return "lien-he";
+	}
 }
