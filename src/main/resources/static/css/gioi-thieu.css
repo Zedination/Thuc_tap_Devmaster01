@@ -1,0 +1,85 @@
+.banner{
+    background-image: url('/images/BANNER-GIOITHIEU.png');
+    background-repeat: no-repeat;
+    height: 470px;
+    position: relative;
+}
+.banner img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+}
+.content{
+    background-color: white;
+    padding-top: 75px;
+    top: -30px;
+    position: relative;
+}
+.content-1{
+    margin-top: 60px;
+}
+.content-2{
+    margin-top: 60px;
+}
+.content-1 img{
+    padding-left: 60px;
+    padding-right: 40px;
+}
+.content-1 div{
+    padding-left: 40px;
+    padding-right: 60px;
+}
+@media only screen and (max-width : 992px){
+    .content-1 img{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .content-1 div{
+        margin-top: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+.content p{
+    font-size: 12px;
+}
+.content-2 img{
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.content-2 div{
+    margin-top: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+@media only screen and (max-width : 992px){
+    .content-2 img{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .content-2 div{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+.content-3 .col-lg-6 .row{
+    border: 3px solid #bd945f;
+}
+.content-3 {
+    margin-top: 60px;
+}
+.content-3 .col-lg-6{
+    margin-bottom: 15px;
+}
+@media only screen and (max-width : 1200px){
+    body > div:nth-child(3) > div > div.row.content-3 > div > div > div.col-md-9.col-8 > p:nth-child(2){
+        height: 60px;
+    }
+}
+@media only screen and (max-width : 346px){
+    body > div:nth-child(3) > div > div.row.content-3 > div > div > div.col-md-9.col-8 > p:nth-child(2){
+        height: 70px;
+    }
+}

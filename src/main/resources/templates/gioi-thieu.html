@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:utext="${title}"></title>
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <link rel="stylesheet" href="../static/css/gioi-thieu.css" th:href="@{css/gioi-thieu.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+    <section class="banner">
+        <img height="200rem" src="../static/images/LOGO-BANNER-GIOITHIEU.png" alt=""
+            th:src="@{images/LOGO-BANNER-GIOITHIEU.png}">
+    </section>
+    <div style="background-color: #f3f3f3;">
+        <div class="container content">
+            <p class="font-ultra" style="font-size: 22px; position: relative; text-align: center;">THÀNH LẬP & PHÁT
+                TRIỂN
+            <div
+                style="position: absolute; height: 10px; width: 160px; background-color: #bd945f; left: 50%; transform: translate(-50%,-50%);">
+            </div>
+            </p>
+            <div class="row content-1 content-text">
+
+                <img class="col-lg-6" src="../static/images/content-gioi-thieu-01.png"
+                    th:src="@{/images/content-gioi-thieu-01.png}" alt="">
+
+                <div class="col-lg-6">
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu.
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                </div>
+            </div>
+            <p class="font-ultra" style="font-size: 22px; position: relative; text-align: center; margin-top: 60px;">TẦM
+                NHÌN
+            <div
+                style="position: absolute; height: 10px; width: 160px; background-color: #bd945f; left: 50%; transform: translate(-50%,-50%);">
+            </div>
+            </p>
+            <div class="row content-2 content-text">
+
+                <img class="col-md-12" src="../static/images/img-content-gioi-thieu02.png"
+                    th:src="@{/images/img-content-gioi-thieu02.png}" alt="">
+
+                <div class="col-md-12">
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu.
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                    <p class="font-medium">
+                        Nội thất Hoàng Hoan được xây dựng dựa trên tình yêu, đam mê của tôi đối với nghề mộc
+                        và khao khát mang những sản phẩm nội thất đẹp của mình đến với khách hàng thân yêu
+                    </p>
+                </div>
+            </div>
+            <p class="font-ultra" style="font-size: 22px; position: relative; text-align: center; margin-top: 60px;">SỨ MỆNH
+            <div
+                style="position: absolute; height: 10px; width: 160px; background-color: #bd945f; left: 50%; transform: translate(-50%,-50%);">
+            </div>
+            </p>
+            <div class="row content-3">
+
+                <div class="col-lg-6" style="padding-left: 40px; padding-right: 40px;">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <img style="margin-top: 16px;" height="55px" width="88px" src="../static/images/GIOITHIEU-xa-hoi.png" th:src = "@{/images/GIOITHIEU-xa-hoi.png}" alt="">
+                        </div>
+                        <div class="col-md-9 col-8">
+                            <p style="margin-bottom: 0px; margin-top: 16px; font-size: 13px; color: #bd945f" class="font-medium">Với xã hội</p>
+                            <p style="font-size: 12px;" class="font-medium">Hài hòa lợi ích doanh nghiệp với lợi ích xã hội, tích cực cùng cộng
+                            đồng xây dựng môi trường sống bền vững</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-left: 40px; padding-right: 40px;">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <img style="margin-top: 16px;" height="55px" width="88px" src="../static/images/GIOITHIEU-nhan-vien.png" th:src = "@{/images/GIOITHIEU-nhan-vien.png}" alt="">
+                        </div>
+                        
+                        <div class="col-md-9 col-8">
+                            <p style="margin-bottom: 0px; margin-top: 16px; font-size: 13px; color: #bd945f" class="font-medium">Với nhân viên</p>
+                            <p style="font-size: 12px;" class="font-medium">
+                                Xây dựng môi trường làm việc chuyên nghiệp, năng động, sáng tạo và nhân văn</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-left: 40px; padding-right: 40px;">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <img style="margin-top: 16px;" height="55px" width="88px" src="../static/images/GIOITHIEU-doi-tac.png" th:src = "@{/images/GIOITHIEU-doi-tac.png}" alt="">
+                        </div>
+                        
+                        <div class="col-md-9 col-8">
+                            <p style="margin-bottom: 0px; margin-top: 16px; font-size: 13px; color: #bd945f" class="font-medium">Với đối tác</p>
+                            <p style="font-size: 12px;" class="font-medium">
+                            Đề cao tinh thần hợp tác cùng phát triển, cam kết trở thành "người đồng hành số 1" của các đối tác</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-left: 40px; padding-right: 40px;">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <img style="margin-top: 16px;" height="55px" width="88px" src="../static/images/GIOITHIEU-thi-truong.png" th:src = "@{/images/GIOITHIEU-thi-truong.png}" alt="">
+                        </div>
+                        <div class="col-md-9 col-8">
+                            <p style="margin-bottom: 0px; margin-top: 16px; font-size: 13px; color: #bd945f" class="font-medium">Với thị trường</p>
+                            <p style="font-size: 12px;" class="font-medium">Cung cấp các sản phẩm chất lượng quốc tế và phù hợp với con người Việt Nam</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:insert="~{fragments :: base-footer}"></th:block>
+    <th:block th:insert="~{fragments :: base-js}"></th:block>
+</body>
+
+</html>
