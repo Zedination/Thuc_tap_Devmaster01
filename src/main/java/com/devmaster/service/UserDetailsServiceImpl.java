@@ -1,6 +1,7 @@
 package com.devmaster.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
  
 import com.devmaster.dao.AppUserDAO;
@@ -36,8 +37,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("Found User: " + appUser);
  
         // [ROLE_USER, ROLE_ADMIN,..]
-        List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
- 
+       List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
+
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (roleNames != null) {
             for (String role : roleNames) {
@@ -52,5 +53,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
  
         return userDetails;
     }
+//	@Override
+//	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException{
+//		List<String> roleNames = Arrays.asList("ROLE_USER","ROLE_ADMIN");
+//		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+//      if (roleNames != null) {
+//          for (String role : roleNames) {
+//              // ROLE_USER, ROLE_ADMIN,..
+//              GrantedAuthority authority = new SimpleGrantedAuthority(role);
+//              grantList.add(authority);
+//          }
+//      }
+//      UserDetails userDetails = (UserDetails) new User("dbadmin1", //
+//            "slhfilashdflashdasd", grantList);
+//
+//      return userDetails;
+//	}
  
 }
