@@ -18,4 +18,8 @@ public class BaseController {
 	public String get_lien_he() {
 		return "lien-he";
 	}
+	@GetMapping("/login")
+	public String get_login() {
+		return "login";
+	}
 }
