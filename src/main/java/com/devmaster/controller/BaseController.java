@@ -10,6 +10,7 @@ public class BaseController {
 	public String get_fragments() {
 		return "fragments";
 	}
+	
 	@GetMapping("/gioi-thieu")
 	public String get_gioi_thieu() {
 		return "gioi-thieu";
