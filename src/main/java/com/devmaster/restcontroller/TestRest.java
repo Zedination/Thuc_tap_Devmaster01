@@ -22,8 +22,4 @@ public class TestRest {
 	public List<LoaiSanPham> get01() {
 		return loaiSanPhamDao.getLoaiSP();
 	}
-	@GetMapping("/1234")
-	public List<String> get02(){
-		return sp.test();
-	}
 }

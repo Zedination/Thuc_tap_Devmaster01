@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class FormDataProduct {
-	private long maSanPham;
+//	private long maSanPham;
 	private String tenSanPham;
 	private long maLoai;
 	private long danhGia;

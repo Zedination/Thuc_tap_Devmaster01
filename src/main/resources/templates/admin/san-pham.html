@@ -96,89 +96,98 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="form-group col-4">
-                        <label for="ma-san-pham-create">Mã sản phẩm</label>
-                        <input type="text" class="form-control" id="ma-san-pham-create" placeholder="Mã sản phẩm tự tạo" readonly>
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
+                <form method="POST" enctype="multipart/form-data" id="formCreateProduct">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="ma-san-pham-create">Mã sản phẩm</label>
+                            <input type="text" class="form-control" id="ma-san-pham-create" name="maSanPham"
+                                placeholder="Mã sản phẩm tự tạo" readonly>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="ten-san-pham-create">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="ten-san-pham-create" name="tenSanPham"
+                                placeholder="Nhập tên sản phẩm">
+                            <div id="ten-san-pham-create-valid"></div>
+                        </div>
                     </div>
-                    <div class="form-group col-8">
-                        <label for="ten-san-pham-create">Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="ten-san-pham-create"
-                            placeholder="Nhập tên sản phẩm">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="ma-loai-create">Loại sản phẩm</label>
+                            <select class="form-control" id="ma-loai-create" name="maLoai">
+                                <th:block th:each="item : ${listLoaiSanPham}">
+                                    <option th:value="${item.maLoai}" th:utext="${item.tenLoai}"></option>
+                                </th:block>
+                            </select>
+                            <div id="ma-loai-create-valid"></div>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="danh-gia-create">Đánh giá</label>
+                            <select class="form-control" id="danh-gia-create" name="danhGia">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <div id="danh-gia-create-valid"></div>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="phan-tram-create">Phẩn trăm</label>
+                            <input type="text" class="form-control" id="phan-tram-create" name="phanTram"
+                                placeholder="Nhập phần trăm">
+                            <div id="phan-tram-create-valid"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-4">
-                        <label for="ma-loai-create">Loại sản phẩm</label>
-                        <select class="form-control" id="ma-loai-create">
-                            <th:block th:each="item : ${listLoaiSanPham}">
-                                <option th:value="${item.maLoai}" th:utext="${item.tenLoai}"></option>
-                            </th:block>
-                        </select>
+                    <div class="row">
+                        <div class="col-8 form-group">
+                            <label for="mo-ta-create">Mô tả</label>
+                            <input type="text" class="form-control" id="mo-ta-create" name="moTa"
+                                placeholder="Nhập mô tả sản phẩm">
+                            <div id="mo-ta-create-valid"></div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="so-luong-create">Số lượng</label>
+                            <input type="text" class="form-control" id="so-luong-create" name="soLuong"
+                                placeholder="Nhập số lượng">
+                            <div id="so-luong-create-valid"></div>
+                        </div>
                     </div>
-                    <div class="form-group col-4">
-                        <label for="danh-gia-create">Đánh giá</label>
-                        <select class="form-control" id="danh-gia-create">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-8 form-group">
+                            <label for="dac-trung-create">Đặc trưng</label>
+                            <textarea class="form-control" id="dac-trung-create" name="dacTrung" rows="3"></textarea>
+                            <div id="dac-trung-create-valid"></div>
+                            <small id="dac-trung-help" class="form-text text-muted">Vui lòng xuống dòng khi nhập nhiều
+                                đặc
+                                trưng</small>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="thong-so-create">Thông số</label>
+                            <textarea class="form-control" id="thong-so-create" name="thongSo" rows="3"></textarea>
+                            <div id="thong-so-create-valid"></div>
+                            <small id="dac-trung-help" class="form-text text-muted">Vui lòng xuống dòng khi nhập nhiều
+                                thông
+                                số</small>
+                        </div>
                     </div>
-                    <div class="form-group col-4">
-                        <label for="phan-tram-create">Phẩn trăm</label>
-                        <input type="text" class="form-control" id="phan-tram-create" placeholder="Nhập phần trăm">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="file-create">Thêm ảnh</label>
+                            <input type="file" class="form-control-file" name="files" multiple id="file-create">
+                            <div id="file-create-valid"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-8 form-group">
-                        <label for="mo-ta-create">Mô tả</label>
-                        <input type="text" class="form-control" id="mo-ta-create" placeholder="Nhập mô tả sản phẩm">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
-                    </div>
-                    <div class="col-4 form-group">
-                        <label for="so-luong-create">Số lượng</label>
-                        <input type="text" class="form-control" id="so-luong-create" placeholder="Nhập số lượng">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-8 form-group">
-                        <label for="dac-trung-create">Đặc trưng</label>
-                        <textarea class="form-control" id="dac-trung-create" rows="3"></textarea>
-                        <small id="dac-trung-help" class="form-text text-muted">Vui lòng xuống dòng khi nhập nhiều đặc
-                            trưng</small>
-                    </div>
-                    <div class="col-4 form-group">
-                        <label for="thong-so-create">Thông số</label>
-                        <textarea class="form-control" id="thong-so-create" rows="3"></textarea>
-                        <small id="dac-trung-help" class="form-text text-muted">Vui lòng xuống dòng khi nhập nhiều thông
-                            số</small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label for="file-create">Thêm ảnh</label>
-                        <input type="file" class="form-control-file" multiple id="file-create">
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                <button type="button" class="btn btn-primary" id="submitCreateProduct">Lưu thay đổi</button>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 <script>
     $(() => {
         var table = $('#dataTable').DataTable({
@@ -199,15 +208,63 @@
         });
         $('#dataTable tbody').on('click', '#btnDetailImage', function () {
             var data = table.row($(this).parents('tr')).data();
+            console.log(data);
             let html = '<div class="row">';
             let array = data[8].split("\n");
             array.forEach(element => {
-                html += '<img class="col-md-6" src="' + element + '" alt="">'
+                html += '<img class="col-md-6" src="files/sanpham/' + element.split("/")[6] + '" alt="">'
             });
             html += '</div>';
             $('#detail-image > div > div > div.modal-body').html(html);
         });
+
+
+        // Jquery validate
+        $('#formCreateProduct').validate({
+            onfocusout: false,
+		    onkeyup: false,
+		    onclick: false,
+            rules: {
+                "tenSanPham": {
+                    required: true,
+                    maxlength: 255
+                },"phanTram":{
+                    number: true,
+                    maxlength: 5,
+                },"soLuong":{
+                    number: true
+                }, "files":{
+                    required: false,
+                    extension: "jpg,jpeg,png,gif"
+                }
+            }
+        });
     })
+    $('#submitCreateProduct').click(() => {
+        if($('#formCreateProduct').valid()){
+            let form = document.getElementById("formCreateProduct");
+            let data = new FormData(form);
+            $('#submitCreateProduct').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/create-product",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    $('#create-product').modal('hide');
+                    $('#submitCreateProduct').html('Lưu thay đổi');
+                }, error: () => {
+                    alert("Thêm sản phẩm thất bại!");
+                    $('#submitCreateProduct').html('Lưu thay đổi');
+                }
+            })
+        }
+    });
 </script>
 </body>
 

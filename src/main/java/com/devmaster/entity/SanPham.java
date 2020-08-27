@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +20,7 @@ import lombok.Data;
 @Table(name = "tblSanPham")
 public class SanPham {
 	@Id
+	@GeneratedValue(generator = "MaSanPham", strategy = GenerationType.IDENTITY)
 	@Column(name = "MaSanPham", nullable = false)
 	private long maSanPham;
 	

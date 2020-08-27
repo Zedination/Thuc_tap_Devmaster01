@@ -1,6 +1,7 @@
 package com.devmaster.dao;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,7 +77,6 @@ public class SanPhamDao {
 	public String createProduct(FormDataProduct product) throws IOException {
 		Session session = this.sessionFactory.getCurrentSession();
 		SanPham newProduct = new SanPham();
-		newProduct.setMaSanPham(product.getMaSanPham());
 		newProduct.setTenSanPham(product.getTenSanPham());
 		LoaiSanPham loaiSanPham = session.load(LoaiSanPham.class, product.getMaLoai());
 		newProduct.setLoaiSanPham(loaiSanPham);
@@ -86,15 +86,20 @@ public class SanPhamDao {
 		newProduct.setSoLuong(product.getSoLuong());
 		newProduct.setDacTrung(product.getDacTrung());
 		newProduct.setThongSo(product.getThongSo());
-		session.save(newProduct);
-		for(int i = 0; i< product.getFiles().length;i++) {
-			saveFile(product.getFiles()[i]);
-			Anh newAnh = new Anh();
-			newAnh.setMaSanPham(product.getMaSanPham());
-			newAnh.setTenAnh("src/main/resources/static/files/sanpham/" + product.getFiles()[i].getOriginalFilename());
-			session.save(newAnh);
+		Serializable id = session.save(newProduct);
+		try {
+			for(int i = 0; i< product.getFiles().length;i++) {
+				saveFile(product.getFiles()[i]);
+				Anh newAnh = new Anh();
+				newAnh.setMaSanPham(Long.valueOf(id.toString()));
+				newAnh.setTenAnh("src/main/resources/static/files/sanpham/" + product.getFiles()[i].getOriginalFilename());
+				session.save(newAnh);
+			}
+		} catch (Exception e) {
+			
 		}
-		return "success";
+		
+		return "Lưu sản phẩm thành công!";
 	}
 	public void saveFile(MultipartFile file) throws IOException {
 		String uploadFilePath =   "src/main/resources/static/files/sanpham/" + file.getOriginalFilename();
