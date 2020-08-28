@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class FormDataProduct {
-//	private long maSanPham;
+	private String maSanPham;
 	private String tenSanPham;
 	private long maLoai;
 	private long danhGia;
@@ -15,5 +15,6 @@ public class FormDataProduct {
 	private long soLuong;
 	private String dacTrung;
 	private String thongSo;
+	private String listImageForUpdate;
 	private MultipartFile[] files;
 }

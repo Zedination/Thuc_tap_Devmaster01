@@ -48,7 +48,11 @@ public class RestSanPham {
 		return data;
 	}
 	@PostMapping(path = "/create-product",consumes = "multipart/form-data")
-	public String test(FormDataProduct product) throws IOException {
+	public String createPro(FormDataProduct product) throws IOException {
 		return sanPhamDao.createProduct(product);
+	}
+	@PostMapping(path = "/update-product",consumes = "multipart/form-data")
+	public String updatePro(FormDataProduct product) throws IOException {
+		return sanPhamDao.updateProduct(product);
 	}
 }

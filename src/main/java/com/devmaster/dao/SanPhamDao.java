@@ -101,6 +101,56 @@ public class SanPhamDao {
 		
 		return "Lưu sản phẩm thành công!";
 	}
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = BankTransactionException.class)
+	public String updateProduct(FormDataProduct updateForProduct) {
+		Session session = this.sessionFactory.getCurrentSession();
+		if(updateForProduct.getListImageForUpdate().split(",").length>0) {
+			for(int i =0;i<updateForProduct.getListImageForUpdate().split(",").length;i++) {
+				String sql = " Delete from Anh where maAnh=:maAnh";
+				Query query = session.createQuery(sql);
+				query.setParameter("maAnh", updateForProduct.getListImageForUpdate().split(",")[i]);
+				query.executeUpdate();
+			}
+		}
+		System.out.println(updateForProduct.getMaSanPham());
+		
+		SanPham sp = session.get(SanPham.class,Long.valueOf(updateForProduct.getMaSanPham()));
+		session.evict(sp);
+		sp.setTenSanPham(updateForProduct.getTenSanPham());
+		LoaiSanPham loaiSanPham = session.load(LoaiSanPham.class, updateForProduct.getMaLoai());
+		sp.setLoaiSanPham(loaiSanPham);
+		sp.setDanhGia(updateForProduct.getDanhGia());
+		sp.setPhanTram(updateForProduct.getPhanTram());
+		sp.setMoTa(updateForProduct.getMoTa());
+		sp.setSoLuong(updateForProduct.getSoLuong());
+		sp.setDacTrung(updateForProduct.getDacTrung());
+		sp.setThongSo(updateForProduct.getThongSo());
+//		String temp[] = updateForProduct.getListImageForUpdate().split(",");
+//		List<Anh> a = new ArrayList<Anh>();
+//		if(temp.length>0) {
+//			for(int i = 0; i<temp.length;i++) {
+//				Anh anh = session.get(Anh.class, temp[i]);
+//				session.evict(anh);
+//				a.add(anh);
+//			}
+//		}
+//		System.out.println(a.toString());
+//		sp.setAnh(a);
+		try {
+			for(int i = 0; i< updateForProduct.getFiles().length;i++) {
+				saveFile(updateForProduct.getFiles()[i]);
+				Anh newAnh = new Anh();
+				newAnh.setMaSanPham(Long.valueOf(updateForProduct.getMaSanPham()));
+				newAnh.setTenAnh("src/main/resources/static/files/sanpham/" + updateForProduct.getFiles()[i].getOriginalFilename());
+				session.save(newAnh);
+			}
+		} catch (Exception e) {
+			
+		}
+		session.update(sp);
+		return "Sửa sản phẩm thành công!";
+	}
+	
 	public void saveFile(MultipartFile file) throws IOException {
 		String uploadFilePath =   "src/main/resources/static/files/sanpham/" + file.getOriginalFilename();
 		Path path = Paths.get(uploadFilePath);
