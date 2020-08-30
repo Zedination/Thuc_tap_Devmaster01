@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.devmaster.entity.Anh;
+import com.devmaster.entity.CTHoaDonNhap;
 import com.devmaster.entity.Datatables;
 import com.devmaster.entity.LoaiSanPham;
 import com.devmaster.entity.SanPham;
@@ -46,8 +46,12 @@ public class SanPhamDao {
 			String tempData1 = "";
 			String tempData2 = "";
 			int i = 1;
-			for (Anh a : x.getAnh()) {
-				if(i==x.getAnh().size()) {
+			String sql2 = " Select a from " + Anh.class.getName() + " a where maSanPham ="+x.getMaSanPham();
+			Query<Anh> query2 = session.createQuery(sql2, Anh.class);
+			List<Anh> as = query2.getResultList();
+			System.out.println(as);
+			for (Anh a : as) {
+				if(i==as.size()) {
 					tempData1+= a.getMaAnh();
 					tempData2+= a.getTenAnh();
 				}else {
@@ -149,6 +153,30 @@ public class SanPhamDao {
 		}
 		session.update(sp);
 		return "Sửa sản phẩm thành công!";
+	}
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = BankTransactionException.class)
+	public String deleteProduct(long maSanPham) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = "Delete from CTHoaDonNhap where sanPham.maSanPham =:maSanPham";
+		Query query = session.createQuery(sql);
+		query.setParameter("maSanPham",maSanPham);
+		query.executeUpdate();
+		
+		String sql2 = "Delete from CTHoaDonXuat where sanPham.maSanPham =:maSanPham";
+		Query query2 = session.createQuery(sql2);
+		query2.setParameter("maSanPham",maSanPham);
+		query2.executeUpdate();
+		
+		String sql3 = "Delete from Anh where maSanPham =:maSanPham";
+		Query query3 = session.createQuery(sql3);
+		query3.setParameter("maSanPham", maSanPham);
+		query3.executeUpdate();
+		
+		String sql4 = "Delete from SanPham where maSanPham =:maSanPham";
+		Query query4 = session.createQuery(sql4);
+		query4.setParameter("maSanPham", maSanPham);
+		query4.executeUpdate();
+		return "Xóa sản phẩm thành công!";
 	}
 	
 	public void saveFile(MultipartFile file) throws IOException {

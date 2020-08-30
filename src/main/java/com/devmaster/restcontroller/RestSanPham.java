@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,5 +55,9 @@ public class RestSanPham {
 	@PostMapping(path = "/update-product",consumes = "multipart/form-data")
 	public String updatePro(FormDataProduct product) throws IOException {
 		return sanPhamDao.updateProduct(product);
+	}
+	@DeleteMapping("/delete-product")
+	public String deletePro(@RequestParam("id") long id) {
+		return sanPhamDao.deleteProduct(id);
 	}
 }

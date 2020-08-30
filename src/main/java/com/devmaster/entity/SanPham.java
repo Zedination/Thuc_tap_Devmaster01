@@ -40,9 +40,8 @@ public class SanPham {
 	@Column(name = "MoTa")
 	private String moTa;
 	
-	@OneToMany
-	@JoinColumn(name = "MaSanPham")
-	private List<Anh> anh;
+//	@OneToMany
+//	private List<Anh> anh;
 	
 	@Column(name = "SoLuong")
 	private long soLuong;
