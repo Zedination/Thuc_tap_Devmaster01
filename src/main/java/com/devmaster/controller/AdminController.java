@@ -34,4 +34,9 @@ public class AdminController {
 		model.addAttribute("listLoaiSanPham", lst);
 		return "admin/san-pham";
 	}
+	@GetMapping("/admin-tin-tuc")
+	public String tin_tuc(Model model) {
+		model.addAttribute("title","Quản lý tin tức");
+		return "admin/tin-tuc";
+	}
 }

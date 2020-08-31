@@ -1,0 +1,192 @@
+<th:block th:replace="~{/admin/fragments :: top-of-content}"></th:block>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
+        information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
+            DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tin tức</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã tin</th>
+                            <th>Tiêu đề</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Mã tin</th>
+                            <th>Tiêu đề</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Chi tiết</h6>
+        </div>
+        <div class="card-body" id="detailEditor">
+            <input type="hidden" id="idNews">
+            <input type="text" class="form-control" id="titleNews" placeholder="Nhập tiêu đề">
+            <br>
+            <textarea name="" id="editor1" cols="30" rows="100">
+
+            </textarea>
+            <br>
+            <div>
+                <button type="button" id="btnCreateNews" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm
+                    tin</button>
+                <button type="button" id="btnUpdateNews" class="btn btn-warning" disabled><i class="far fa-edit"></i>
+                    Sửa tin</button>
+                <button type="button" id="btnResetForm" class="btn btn-secondary"><i class="far fa-dizzy"></i> Xóa trắng
+                    form</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận xóa tin tức</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idProductForDelete">
+                Bạn có muốn xóa tin tức này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" id="submitDeleteNews" class="btn btn-primary">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{/admin/fragments :: bottom-of-content}"></th:block>
+<script src="https://rawgit.com/o7planning/webexamples/master/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+<script>
+    $(() => {
+        var table = $('#dataTable').DataTable({
+            "ajax": "/list-news",
+            "columnDefs": [{
+                "targets": 2,
+                "data": null,
+                "defaultContent": '<a href = "#detailEditor" style = "color: white;" type="button" class="btn btn-info" id = "btnDetail"><i class="far fa-trash-alt"></i> Xem chi tiết</a> <button type="button" class="btn btn-danger" id = "btnDelete" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i> Xóa</button>'
+            }]
+        });
+
+        $('#dataTable tbody').on('click', '#btnDetail', function () {
+            var data = table.row($(this).parents('tr')).data();
+            $('#idNews').val(data[0]);
+            $('#titleNews').val(data[1]);
+            CKEDITOR.instances['editor1'].setData(data[2]);
+            $('#btnCreateNews').prop('disabled', true);
+            $('#btnUpdateNews').prop('disabled', false);
+        });
+        
+        $('#dataTable tbody').on('click', '#btnDelete', function () {
+            var data = table.row($(this).parents('tr')).data();
+            $('#idNews').val(data[0]);
+        });
+        $('#btnCreateNews').click(() => {
+            if ($('#titleNews').val() == "") {
+                alert("Vui lòng nhập tiêu đề!");
+            } else {
+                let obj = new Object();
+                obj.title = $('#titleNews').val();
+                obj.content = CKEDITOR.instances.editor1.getData();
+                $.ajax({
+                    url: '/create-news',
+                    type: 'post',
+                    data: obj,
+                    success: result => {
+                        alert(result);
+                        table.ajax.reload();
+                    }, error: () => {
+                        alert("Lưu tin thất bại! Vui lòng thử lại.");
+                    }
+                })
+            }
+        });
+
+        $('#btnUpdateNews').click(() => {
+            if ($('#titleNews').val() == "") {
+                alert("Vui lòng nhập tiêu đề!");
+            } else {
+                let obj = new Object();
+                obj.title = $('#titleNews').val();
+                obj.content = CKEDITOR.instances.editor1.getData();
+                obj.id = $('#idNews').val();
+                alert(obj.id);
+                $.ajax({
+                    url: '/update-news',
+                    type: 'post',
+                    data: obj,
+                    success: result => {
+                        alert(result);
+                        table.ajax.reload();
+                    }, error: () => {
+                        alert("Sửa tin thất bại! Vui lòng thử lại.");
+                    }
+                });
+                $('#deleteModal').modal('hide');
+            }
+        });
+
+        $('#submitDeleteNews').click(() => {
+            let obj = new Object();
+            obj.id = $('#idNews').val();
+            $.ajax({
+                url: '/delete-news',
+                type: 'delete',
+                data: obj,
+                success: result => {
+                    alert(result);
+                    table.ajax.reload();
+                    CKEDITOR.instances['editor1'].setData("");
+                    $('#titleNews').val("");
+                    $('#idNews').val('');
+                    $('#btnCreateNews').prop('disabled', false);
+                    $('#btnUpdateNews').prop('disabled', true);
+                }, error: () => {
+                    alert("Xóa tin thất bại! Vui lòng thử lại.");
+                }
+            })
+        });
+    });
+    $('#btnResetForm').click(() => {
+        CKEDITOR.instances['editor1'].setData("");
+        $('#titleNews').val("");
+        $('#idNews').val('');
+        $('#btnCreateNews').prop('disabled', false);
+        $('#btnUpdateNews').prop('disabled', true);
+    });
+</script>
+</body>
+
+</html>
