@@ -36,6 +36,14 @@ public class LoaiSanPhamDao {
         return query.getResultList();
 	}
 	
+	public LoaiSanPham getLoaiSPByID(long maLoai) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = "Select e from " + LoaiSanPham.class.getName() + " e where maLoai = "+maLoai;
+ 
+        Query<LoaiSanPham> query = session.createQuery(sql, LoaiSanPham.class);
+        return query.getResultList().get(0);
+	}
+	
 //	public List<String> getListTenLoai(){
 //		Session session = this.sessionFactory.getCurrentSession();
 //		String sql = "Select e.tenLoai from " + LoaiSanPham.class.getName() + " e ";

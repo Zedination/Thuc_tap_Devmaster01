@@ -1,0 +1,178 @@
+<th:block th:replace="~{/admin/fragments :: top-of-content}"></th:block>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
+        information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
+            DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tin tức</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Nội dung</th>
+                            <th>Thời gian</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Nội dung</th>
+                            <th>Thời gian</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận xóa!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idLienHeDelete">
+                Bạn có muốn xóa phản hồi này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" id="submitDeleteLienHe" class="btn btn-primary">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal send mail-->
+<div class="modal fade" id="modalSendMail" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Gửi phản hồi cho khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="nguoi-nhan">Người nhận</label>
+                    <input type="text" class="form-control" id="nguoi-nhan" placeholder="Email nhận" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Tiêu đề Mail</label>
+                    <input type="text" class="form-control" id="subject"
+                        placeholder="Nhập tiêu đề cho mail phản hồi tại đây">
+                </div>
+                <div class="form-group">
+                    <label for="editor1">Nội dung phản hồi</label>
+                    <textarea type="text" class="form-control" id="editor1" cols="3"
+                        placeholder="Nội dung phản hồi tại đây">
+                </textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" id="submitSendMail" class="btn btn-primary">Gửi phản hổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{/admin/fragments :: bottom-of-content}"></th:block>
+<script src="https://rawgit.com/o7planning/webexamples/master/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+<script>
+    $(() => {
+        var table = $('#dataTable').DataTable({
+            "ajax": "/list-lienhe",
+            "columnDefs": [{
+                "targets": -1,
+                "data": null,
+                "defaultContent": '<button type="button" class="btn btn-danger" id = "btnDelete" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i> Xóa</button>&nbsp<button type="button" id = "btnPhanHoi" data-toggle="modal" data-target="#modalSendMail" class="btn btn-primary"><i class="fas fa-info-circle"></i> Gửi phản hồi</button>'
+            }, {
+                "visible": false, "targets": 0
+            }]
+        });
+        $('#dataTable tbody').on('click', '#btnDelete', function () {
+            var data = table.row($(this).parents('tr')).data();
+            $('#idLienHeDelete').val(data[0]);
+        });
+        $('#dataTable tbody').on('click', '#btnPhanHoi', function () {
+            var data = table.row($(this).parents('tr')).data();
+            $('#subject').val();
+            CKEDITOR.instances.editor1.setData("");
+            $('#nguoi-nhan').val(data[2]);
+        });
+        $('#submitDeleteLienHe').click(() => {
+            $.ajax({
+                type: 'delete',
+                url: "/deletelienhe?id=" + $('#idLienHeDelete').val(),
+                success: result => {
+                    alert("Xóa liên hệ thành công!");
+                    $('#deleteModal').modal('hide');
+                    table.ajax.reload();
+                }, error: () => {
+                    alert("Xóa sản phẩm thất bại!");
+                }
+            })
+        });
+        $('#submitSendMail').click(() => {
+            let data = new Object;
+            data.subject = $('#subject').val();
+            data.nguoiNhan = $('#nguoi-nhan').val();
+            data.content = CKEDITOR.instances.editor1.getData();
+            if (data.subject != "") {
+                $('#submitSendMail').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+                $.ajax({
+                    type: 'post',
+                    url: '/rest-send-mail',
+                    data: data,
+                    success: () => {
+                        alert("Gửi phản hồi tới khách hàng thành công!");
+                        $('#modalSendMail').modal('hide');
+                        $('#subject').val();
+                        $('#nguoi-nhan').val();
+                        CKEDITOR.instances.editor1.setData("");
+                        $('#submitSendMail').html('Gửi phản hồi');
+                    }, error: () => {
+                        alert("Gửi phản hồi tới khách hàng thất bại!");
+                        $('#submitSendMail').html('Gửi phản hồi');
+                    }
+                });
+            } else {
+                alert("Vui lòng điền tiêu đề của phản hồi!");
+            }
+        })
+    });
+</script>
+</body>
+
+</html>

@@ -25,7 +25,7 @@ public class AdminController {
 	private HoaDonNhapDao hoaDonNhapDao;
 	@Autowired
 	private SanPhamDao sanPhamDao;
-	
+
 	@GetMapping("/admin-fragments")
 	public String admin_fragment() {
 		return "admin/fragments";
@@ -61,5 +61,11 @@ public class AdminController {
 		List<SanPham> lstsanpham = hoaDonNhapDao.getcbSanPham();
 		model.addAttribute("listSanPham", lstsanpham);
 		return "admin/hoa-don-nhap";
+	}
+
+	@GetMapping("/admin-lien-he")
+	public String lien_he(Model model) {
+		model.addAttribute("title", "Liên hệ");
+		return "admin/lien-he";
 	}
 }

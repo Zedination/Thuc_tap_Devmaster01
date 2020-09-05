@@ -173,7 +173,7 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label for="file-create">Thêm ảnh</label>
-                            <input type="file" class="form-control-file" name="files" multiple id="file-create">
+                            <input type="file" class="form-control-file" name="files" multiple id="file-create" accept="image/*">
                             <div id="file-create-valid"></div>
                         </div>
                     </div>
@@ -336,6 +336,25 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 <script>
+    jQuery.extend(jQuery.validator.messages, {
+            required: "Không được bỏ trống trường này.",
+            remote: "Please fix this field.",
+            email: "Please enter a valid email address.",
+            url: "Please enter a valid URL.",
+            date: "Please enter a valid date.",
+            dateISO: "Please enter a valid date (ISO).",
+            number: "Vui lòng nhập số vào trường này.",
+            digits: "Vui lòng nhập số nguyên vào trường này.",
+            creditcard: "Please enter a valid credit card number.",
+            equalTo: "Please enter the same value again.",
+            accept: "Please enter a value with a valid extension.",
+            maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+            minlength: jQuery.validator.format("Please enter at least {0} characters."),
+            rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+            range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+            max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+            min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+        });
     function hideImage(element) {
         element.parentElement.style.display = "none";
         // let oldVal = $('#image-for-update').val();
@@ -395,6 +414,15 @@
             }
             $('#showImageForUpdate .modal-body .row').html(html);
         }
+        $.validator.addMethod('checkRatioImage',function(value, element){
+            let _URL = window.URL || window.webkitURL;
+            var objectUrl = _URL.createObjectURL(element.files[0]);
+            let image = new Image();
+            image.onload = ()=>{
+                console.log(this.width + " " + this.height);
+                return true;
+            }
+        },"Vui lòng nhập ảnh có kích thước phù hợp");
         $('#dataTable tbody').on('click', '#btnDetailImage', function () {
             var data = table.row($(this).parents('tr')).data();
             console.log(data);
@@ -426,9 +454,11 @@
                     required: true,
                     maxlength: 255
                 }, "phanTram": {
+                    required: true,
                     number: true,
                     maxlength: 5,
                 }, "soLuong": {
+                    required: true,
                     number: true
                 }, "files": {
                     required: false,
@@ -445,9 +475,11 @@
                     required: true,
                     maxlength: 255
                 }, "phanTram": {
+                    required: true,
                     number: true,
                     maxlength: 5,
                 }, "soLuong": {
+                    required: true,
                     number: true
                 }, "files": {
                     required: false,

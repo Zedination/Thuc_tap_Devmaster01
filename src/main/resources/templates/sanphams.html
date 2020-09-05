@@ -51,7 +51,7 @@
          <th:block th:each="data : ${listGroupProduct}">
             <div class="phong">
                <h5 style="text-transform: uppercase;" class="loaiphong font-ultra" th:utext = "${data.tenLoai}">PHÒNG KHÁCH</h5>
-               <p class="xemtatca font-medium"><a href="#">XEM TẤT CẢ</a></p>
+               <p class="xemtatca font-medium"><a th:href="@{'/tat-ca-san-pham?maLoai='+${data.maLoai}}">XEM TẤT CẢ</a></p>
                <div class="row sanpham" style="text-align: center;">
                   <th:block th:each="product : ${data.top4}">
                      <div class="col-md-3">

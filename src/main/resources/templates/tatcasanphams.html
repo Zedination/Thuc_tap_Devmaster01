@@ -48,9 +48,9 @@
            <div class="row" style="margin-bottom: 10px;">
                <div class="col-md-2 font-medium" style="padding-left: 30px; color: #2c2e53;">Chọn mức giá:</div>
                <div class="col-md-8" style="padding-left: 30px;">
-                   <span class="font-medium"><a href="#" style="margin-right: 35px;color: #bd945f;">Dưới 5 triệu</a></span>
-                   <span class="font-medium"><a href="#" style="margin-right: 35px; color: #bd945f;">5-10 triệu</a></span>
-                   <span class="font-medium"><a href="#" style="color: #bd945f;">10-15 triệu</a></span>
+                   <span class="font-medium"><a th:href="@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia=5&sortBy='+${phanTrangInfo.sortBy}}" style="margin-right: 35px;color: #bd945f;">Dưới 5 triệu</a></span>
+                   <span class="font-medium"><a th:href="@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia=5-10&sortBy='+${phanTrangInfo.sortBy}}" style="margin-right: 35px; color: #bd945f;">5-10 triệu</a></span>
+                   <span class="font-medium"><a th:href="@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia=10-15&sortBy='+${phanTrangInfo.sortBy}}" style="color: #bd945f;">10-15 triệu</a></span>
                </div>
                <div class="col-md-2">
                 <div class="dropdown font-medium" style="padding-left: 2px;">
@@ -58,74 +58,40 @@
                       Sắp xếp
                     </button>
                     <div class="dropdown-menu" style="border: 3px solid #bd945f;">
-                      <a class="dropdown-item" href="#">Mới nhất</a>
-                      <a class="dropdown-item" href="#">Phổ biến nhất</a>
-                      <a class="dropdown-item" href="#">Gía cao đến thấp</a>
-                      <a class="dropdown-item" href="#">Gía thấp đến cao</a>
+                      <a class="dropdown-item" th:href = "@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia='+${phanTrangInfo.mucGia}+'&sortBy=time'}">Mới nhất</a>
+                      <!-- <a class="dropdown-item" href="#">Phổ biến nhất</a> -->
+                      <a class="dropdown-item" th:href = "@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia='+${phanTrangInfo.mucGia}+'&sortBy=priceDesc'}">Giá cao đến thấp</a>
+                      <a class="dropdown-item" th:href = "@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia='+${phanTrangInfo.mucGia}+'&sortBy=priceAsc'}">Giá thấp đến cao</a>
                     </div>
                   </div>
                </div>
            </div>
            <div class="phong">
-              <h5 class="loaiphong font-ultra">PHÒNG KHÁCH</h5>
+              <h5 class="loaiphong font-ultra" style="text-transform: uppercase;" th:utext = "${groupProduct.tenLoai}">PHÒNG KHÁCH</h5>
               <div class="row sanpham" style="text-align: center;">
-               <div class="col-md-3">
-                  <img src="../static/images/sp-4.jpg" th:src="@{images/sp-4.jpg}" alt="">
-                  <p><a href="#">BÀN UỐNG NƯỚC</a></p>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <p><small>(Size vừa, nâu đậm)</small></p>
-                  <h6>8.999.000 VNĐ</h6>
-               </div>
-               <div class="col-md-3">
-                  <img src="../static/images/sp-4.jpg" th:src="@{images/sp-4.jpg}" alt="">
-                  <p><a href="#">BÀN UỐNG NƯỚC 2</a></p>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <p><small>(Size vừa, nâu vân gỗ)</small></p>
-                  <h6>3.999.000 VNĐ</h6>
-               </div>
-               <div class="col-md-3">
-                  <img src="../static/images/sp-4.jpg" th:src="@{images/sp-4.jpg}" alt="">
-                  <p><a href="#">KỆ TV</a></p>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <p><small>(4 ngăn, gỗ lim)</small></p>
-                  <h6>12.999.000 VNĐ</h6>
-               </div>
-               <div class="col-md-3">
-                  <img src="../static/images/sp-4.jpg" th:src="@{images/sp-4.jpg}" alt="">
-                  <p><a href="#">KỆ ĐỂ ĐỒ</a></p>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <span><i class="fas fa-star"></i></span>
-                  <p><small>(4 ngăn, trắng gỗ)</small></p>
-                  <h6>2.499.000 VNĐ</h6>
-               </div>
+               <th:block th:each="product : ${groupProduct.top4}">
+                     <div class="col-md-3">
+                        <img th:src="@{'files/sanpham/'+${product.pathImage}}" alt="">
+                        <p><a th:href="@{'/chi-tiet-san-pham?maSanPham='+${product.id}}" th:text="${product.name}">BÀN UỐNG NƯỚC</a></p>
+                        <th:block th:each="rate : ${product.rate}">
+                           <span><i class="fas fa-star"></i></span>
+                        </th:block>
+                        <p><small th:text="${product.description}">(Size vừa, nâu đậm)</small></p>
+                        <h6 th:utext = "${product.price+' VNĐ'}">8.999.000 VNĐ</h6>
+                     </div>
+                  </th:block>
             </div>
               <div style="margin-top: 15px;">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
+                       <th:block th:each="item, state: ${lstPages}">
+                           <th:block th:if="@{${state.count}==${phanTrangInfo.position}}">
+                              <li class="page-item active"><a class="page-link" th:utext = "${state.count}" th:href="@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia='+${phanTrangInfo.mucGia}+'&sortBy='+${phanTrangInfo.sortBy}+'&position='+${state.count}}">1</a></li>
+                           </th:block>
+                           <th:block th:if="@{${state.count}!=${phanTrangInfo.position}}">
+                              <li class="page-item"><a class="page-link" th:utext = "${state.count}" th:href="@{'?maLoai='+${phanTrangInfo.maLoai}+'&mucGia='+${phanTrangInfo.mucGia}+'&sortBy='+${phanTrangInfo.sortBy}+'&position='+${state.count}}">1</a></li>
+                           </th:block>
+                       </th:block>
                     </ul>
                 </nav>
            </div>

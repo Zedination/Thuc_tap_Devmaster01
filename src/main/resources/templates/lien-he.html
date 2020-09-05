@@ -7,6 +7,11 @@
     <th:block th:insert="~{fragments :: base-css}"></th:block>
     <link rel="stylesheet" href="../static/css/gioi-thieu.css" th:href="@{css/gioi-thieu.css}">
     <link rel="stylesheet" href="../static/css/lien-he.css" th:href="@{css/lien-he.css}">
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,21 +24,75 @@
         <div class="container content">
             <div class="row">
                 <div class="col-lg-6" style="padding-left: 40px;">
-                    <img src="../static/images/LIENHE-img-content.png" th:src = "@{images/LIENHE-img-content.png}" alt="">
+                    <img src="../static/images/LIENHE-img-content.png" th:src="@{images/LIENHE-img-content.png}" alt="">
                 </div>
-                <form style="margin-bottom: 50px;" class="col-lg-6" action="#">
+                <form style="margin-bottom: 50px;" class="col-lg-6" id="formCreateLH">
                     <p style="font-size: 22px; color: #bd945f;" class="font-ultra">LIÊN HỆ VỚI CHÚNG TÔI</p>
-                    <input type="text" class="form-control font-medium" id="hoten" name = "hoten" placeholder="Họ tên" required>
-                    <input type="email" class="form-control font-medium" id="email" name = "email" placeholder="Email" required>
-                    <input type="tel" class="form-control font-medium" id="sodienthoai" name = "sodienthoai" placeholder="Số điện thoại" required>
-                    <input type="text" class="form-control font-medium" id="noidung" name = "noidung" placeholder="Nội dung" required>
-                    <button class="font-medium" type="submit">Gửi</button>
+                    <input type="text" class="form-control font-medium" id="hoten" name="hoTen" placeholder="Họ tên">
+                    <input type="email" class="form-control font-medium" id="email" name="email" placeholder="Email">
+                    <input type="tel" class="form-control font-medium" id="sodienthoai" name="soDienThoai"
+                        placeholder="Số điện thoại">
+                    <input type="text" class="form-control font-medium" id="noidung" name="noiDung"
+                        placeholder="Nội dung">
+                    <button class="font-medium" id="btnSubmit">Gửi</button>
                 </form>
             </div>
         </div>
     </div>
     <th:block th:insert="~{fragments :: base-footer}"></th:block>
     <th:block th:insert="~{fragments :: base-js}"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+    <script>
+        $(() => {
+            $('#formCreateLH').validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "hoTen":{
+                        required: true,
+                        maxlength: 255
+                    },
+                    "soDienThoai": {
+                        required: true,
+                        number: true,
+                        maxlength: 255
+                    }, "email": {
+                        required: true,
+                        email: true,
+                    }
+                }
+            });
+            $('#btnSubmit').click((e) => {
+                if ($('#formCreateLH').valid()) {
+                    e.preventDefault();
+                    let form = document.getElementById("formCreateLH");
+                    let data = new FormData(form);
+                    let d = new Date();
+                    data.append("thoiGian", d.getTime());
+                    $.ajax({
+                        type: 'post',
+                        url: "/createlienhe",
+                        enctype: 'multipart/form-data',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 1000000,
+                        success: result => {
+                            alert("Gửi thành công!");
+                            document.getElementById("formCreateLH").reset();
+                        }, error: () => {
+                            alert("Gửi thất bại!");
+                        }
+                    })
+                }else{
+                    $("#btnSubmit").addClass("intro");
+                    $("#formCreateLH").addClass("resform")
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
