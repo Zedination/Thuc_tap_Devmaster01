@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <th:block th:fragment="base-css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" th:inline="text" href="../static/css/tintuc.css" th:href="@{css/tintuc.css}">
+    </th:block>
+</head>
+<body>
+
+    <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+        <div id="tintuc">
+            <div class="container tintuc">
+                <div style="text-align: center;">
+                    <h2 class="font-ultra">TIN TỨC</h2>
+                </div>
+                <div class="row" style="padding: 20px;">
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHONG NGỦ</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Những căn hộ chung cư mini, có diện tích nhỏ ngày càng trở nên ưa chuộng hơn trong cuộc 
+                               sống hiện đại với những ai có khoản chi phí "hạn 
+                               hẹp".</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc1.jpg" th:src="@{images/tintuc1.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">25+ MẪU GIƯỜNG NGỦ HỘC KÉO THÔNG MINH CHO CĂN PHÒNG BẠN</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Sự thật là chúng ta đã dàng hêt 1/3 cuộc đời chỉ để ngủ, vì thế để tạo một giấc ngủ ngon là một điều 
+                               đặc biệt quan trọng.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">TUYỆT CHIÊU THIẾT KẾ CHUNG CƯ MINI 2 PHÒNG NGỦ SIÊU ĐẸP</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Độ tuổi khởi nghiệp và tụ lập ngày càng trẻ hóa trong xã hội hiện đại thời nay, thế nên việc "thiết 
+                            kế căn hộ chung cư mini 2 phòng ngủ"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 20px;">
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHONG NGỦ</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Những căn hộ chung cư mini, có diện tích nhỏ ngày càng trở nên ưa chuộng hơn trong cuộc 
+                               sống hiện đại với những ai có khoản chi phí "hạn 
+                               hẹp".</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc1.jpg" th:src="@{images/tintuc1.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">25+ MẪU GIƯỜNG NGỦ HỘC KÉO THÔNG MINH CHO CĂN PHÒNG BẠN</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Sự thật là chúng ta đã dàng hêt 1/3 cuộc đời chỉ để ngủ, vì thế để tạo một giấc ngủ ngon là một điều 
+                               đặc biệt quan trọng.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">TUYỆT CHIÊU THIẾT KẾ CHUNG CƯ MINI 2 PHÒNG NGỦ SIÊU ĐẸP</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Độ tuổi khởi nghiệp và tụ lập ngày càng trẻ hóa trong xã hội hiện đại thời nay, thế nên việc "thiết 
+                            kế căn hộ chung cư mini 2 phòng ngủ"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 20px;">
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHONG NGỦ</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Những căn hộ chung cư mini, có diện tích nhỏ ngày càng trở nên ưa chuộng hơn trong cuộc 
+                               sống hiện đại với những ai có khoản chi phí "hạn 
+                               hẹp".</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc1.jpg" th:src="@{images/tintuc1.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">25+ MẪU GIƯỜNG NGỦ HỘC KÉO THÔNG MINH CHO CĂN PHÒNG BẠN</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Sự thật là chúng ta đã dàng hêt 1/3 cuộc đời chỉ để ngủ, vì thế để tạo một giấc ngủ ngon là một điều 
+                               đặc biệt quan trọng.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="img1">
+                            <img src="../static/images/tintuc3.jpg" th:src="@{images/tintuc3.jpg}" alt="noi that">
+                        </div>
+
+                        <div class="title">
+                            <a href="#" class="font-ultra">TUYỆT CHIÊU THIẾT KẾ CHUNG CƯ MINI 2 PHÒNG NGỦ SIÊU ĐẸP</a>
+                        </div>
+
+                        <div class="dt">
+                            <p class="font-medium" style="font-size: 13px; margin-top: 15px;">Độ tuổi khởi nghiệp và tụ lập ngày càng trẻ hóa trong xã hội hiện đại thời nay, thế nên việc "thiết 
+                            kế căn hộ chung cư mini 2 phòng ngủ"</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    <th:block th:insert="~{fragments :: base-footer}"></th:block>
+    <th:block th:insert="~{fragments :: base-js}"></th:block>
+</body>
+</html>

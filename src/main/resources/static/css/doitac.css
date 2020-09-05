@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: Gotham-medium;
+    src: url('/fonts/Gotham-Medium.otf');
+}
+@font-face {
+    font-family: Gotham-thin;
+    src: url('/fonts/Gotham-Thin.otf');
+}
+@font-face {
+    font-family: Gotham-ultra;
+    src: url('/fonts/Gotham-Ultra.otf');
+}
+.font-thin{
+    font-family: Gotham-thin;
+}
+.font-medium{
+    font-family: Gotham-medium;
+}
+.font-ultra{
+    font-family: Gotham-ultra;
+}
+
+
+.banner{
+    background-image: url('/images/doitac.jpg');
+    background-repeat: no-repeat;
+    height: 350px;
+    position: relative;
+}
+.banner img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+}
+
+.content{
+    background-color: white;
+    padding-top: 75px;
+    top: -30px;
+    position: relative;
+}
+

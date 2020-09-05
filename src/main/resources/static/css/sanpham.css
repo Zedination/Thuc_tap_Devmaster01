@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container-fluid{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.carousel-indicators li {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+}
+@font-face {
+    font-family: SVN-sharpen;
+    src: url('/fonts/SVN-sharpen.otf');
+}
+.font-sharpen{
+    font-family: SVN-sharpen;
+}
+#content > div > div > div > div > p > small{
+    font-family: Gotham-thin;
+}
+.phong{
+    background-color: white; 
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.loaiphong{
+    border-bottom: 3px solid #bd945f;
+    display: inline-block !important;
+    color: #2c2e53;
+    margin-bottom: 20px;
+}
+#content{
+    background-color: #f3f3f3;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+#content > div > div > div > div > img{
+    width: 100%;
+}
+#content > div > div > div > div > p{
+    margin-bottom: 0px;
+}
+#content > div > div > div > div > p:nth-child(2) > a{
+    color: #2c2e53;
+    text-decoration: none;
+}
+#content > div > div > div > div > p:nth-child(2){
+    font-family: Gotham-ultra;
+    margin-top: 15px;
+    color: #2c2e53;
+    /* font-size: 15px; */
+}
+#content > div > div > div > div > span{
+    color: #bd945f;
+}
+.xemtatca{
+    margin-top: 10px;
+    float: right;
+    font-size: 13px;
+}
+.sanpham{
+    clear: both;
+}
+@media only screen and (max-width: 1023px){
+    #myCarousel > p.font-sharpen{
+        font-size: 30pt !important;
+    }
+    #myCarousel > p:nth-child(6){
+        font-size: 18px !important;
+    }
+}
+@media only screen and (max-width: 562px){
+    #myCarousel > p.font-sharpen{
+        font-size: 15pt !important;
+    }
+}
+#myCarousel > p.font-sharpen{
+    position: absolute; 
+    top: 30%; 
+    left: 65%; 
+    transform: translate(-30%, -65%); 
+    font-size: 50pt; 
+    color: #bd945f;
+}
+#myCarousel > p:nth-child(6){
+    position: absolute; 
+    top: 40%; 
+    left: 72%; 
+    transform: translate(-40%, -72%);
+    font-size: 22px;
+}
+@media only screen and (max-width: 780px){
+    #myCarousel > p:nth-child(6){
+        font-size: 13px !important;
+    }
+}
+@media only screen and (max-width: 520px){
+    #myCarousel > p:nth-child(6){
+        font-size: 10px !important;
+    }
+    #myCarousel > button{
+        position: absolute !important;
+        top: 70% !important; 
+        left: 80% !important;
+        transform: translate(-70%, -80%) !important;
+    }
+}
+@media only screen and (max-width: 365px){
+    #myCarousel > p:nth-child(6){
+        font-size: 8px !important;
+    }
+}
+@media only screen and (max-width: 412px){
+    #myCarousel > button{
+        position: absolute !important;
+        top: 80% !important; 
+        left: 80% !important;
+        transform: translate(-80%, -80%) !important;
+    }
+}
+

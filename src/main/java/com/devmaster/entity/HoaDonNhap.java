@@ -20,7 +20,5 @@ public class HoaDonNhap {
     
     @Column(name = "NgayNhap")
     private String ngayNhap;
-    
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hoaDonNhap", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
-//    private List<CTHoaDonNhap> listcthdn = new ArrayList<>();
+
 }

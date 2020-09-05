@@ -1,0 +1,491 @@
+<th:block th:replace="~{/admin/fragments :: top-of-content}"></th:block>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
+        information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
+            DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#create-hdn"><i class="fas fa-plus"></i>
+                Thêm phiếu nhập</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Số phiếu nhập</th>
+                            <th>Ngày nhập</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Số phiếu nhập</th>
+                            <th>Ngày nhập</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container-fluid -->
+<th:block th:replace="~{/admin/fragments :: bottom-of-content}"></th:block>
+<!-- Modal thêm hdn -->
+<div class="modal fade" id="create-hdn" tabindex="-1" role="dialog" aria-labelledby="create-productTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="create-productTitle1">Thêm Phiếu nhập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" id="formCreateHDN">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="ma-pn-create">Số phiếu nhập</label>
+                            <input type="text" class="form-control" id="ma-pn-create" name="soPn"
+                                placeholder="Nhập số phiếu nhập">
+                            <div id="soPn-create-valid"></div>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="ngay-nhap-create">Ngày nhập</label>
+                            <input type="text" class="form-control" id="ngay-nhap-create" name="ngayNhap"
+                                placeholder="Nhập ngày nhập">
+                            <div id="ngay-nhap-create-valid"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="dongcreatehdn">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitCreateHDN">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal sửa hdn -->
+<div class="modal fade" id="editModalHDN" tabindex="-1" role="dialog" aria-labelledby="edit-productTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="create-productTitle">Sửa Phiếu nhập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" id="formEditHDN">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="ma-pn-create">Số phiếu nhập</label>
+                            <input type="text" class="form-control" id="ma-pn-edit" name="soPn"
+                                placeholder="Nhập số phiếu nhập" readonly>
+                            <div id="soPn-create-valid"></div>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="ngay-nhap-create">Ngày nhập</label>
+                            <input type="text" class="form-control" id="ngay-nhap-edit" name="ngayNhap"
+                                placeholder="Nhập ngày nhập">
+                            <div id="ngay-nhap-create-valid"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitChangesHDN">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Xóa Hóa Đơn Nhập-->
+<!-- Modal -->
+<div class="modal fade" id="deleteModalHDN" tabindex="-1" role="dialog" aria-labelledby="deleteModalHDN"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xóa hóa đơn nhập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Lưu ý: khi bạn xóa hóa đơn nhập này thì đồng nghĩa bạn sẽ xóa những bản ghi liên quan đến hóa đơn này
+                !<br>
+                Bạn có muốn xóa hóa đơn nhập này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitDeleteHDN">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal show datatables chi tiết hóa đơn nhập-->
+<div class="modal fade" id="DetailModalCTHDN" tabindex="-1" role="dialog" aria-labelledby="DetailModalCTHDN"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết hóa đơn nhập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;" class="row">
+                    <div class="col-md-12">
+                        <button type="button" id="SubmitCreateCTHDN" class="btn btn-primary"><i
+                                class="fas fa-plus-circle"></i> Thêm</button>&nbsp;
+                        <button type="button" id="SubmitEditCTHDN" class="btn btn-primary"><i class="far fa-edit"></i>
+                            Sửa</button>&nbsp;
+                        <button type="button" id="SubmitDeleteCTHDN" class="btn btn-primary"><i
+                                class="far fa-trash-alt"></i> Xóa</button>
+                        <button type="button" id="SubmitResetCRUD" class="btn btn-primary"><i
+                                class="fas fa-toilet-paper"></i> Reset crud</button>
+                    </div>
+                    <form method="POST" enctype="multipart/form-data" id="formCTHDN">
+                        <div class="row">
+                            <div class="col-md-2" style="display: none;">
+                                <label for="ID" class="col-form-label">ID</label>
+                                <input type="text" class="form-control" id="Id" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="so-pn-ct" class="col-form-label">Số phiếu nhập</label>
+                                <select class="form-control" id="so-pn-ct" name="soPn">
+                                    <th:block th:each="item : ${listHoaDonNhap}">
+                                        <option th:value="${item.soPn}" th:utext="${item.soPn}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="masp-ct" class="col-form-label">Mã sản phẩm</label>
+                                <select class="form-control" id="masp-ct" name="maSanPham">
+                                    <th:block th:each="item : ${listSanPham}">
+                                        <option th:value="${item.maSanPham}" th:utext="${item.maSanPham}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="slnhap-ct" class="col-form-label">Số lượng nhập</label>
+                                <input type="text" class="form-control" id="slnhap-ct" name="soLuongNhap">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dgn-ct" class="col-form-label">Đơn giá nhập</label>
+                                <input type="text" class="form-control" id="dgn-ct" name="donGiaNhap">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-bordered" id="dataTableCTHoaDonNhap" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Mã hóa đơn nhập</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Đơn giá nhập</th>
+                            <th>Số lượng nhập</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Mã hóa đơn nhập</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Đơn giá nhập</th>
+                            <th>Số lượng nhập</th>
+                            <th>Quản lý</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitDeleteHDN">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script>
+    var sopn1 = "";
+    $(() => {
+        var tablehdn = $('#dataTable').DataTable({
+            "ajax": "/datatable-hdn",
+            "columnDefs": [{
+                "targets": -1,
+                "data": null,
+                "defaultContent": '<button type="button" id = "btnEditHDN" data-toggle="modal" data-target="#editModalHDN" class="btn btn-primary"><i class="far fa-edit"></i> Sửa</button>&nbsp;<button type="button" class="btn btn-danger" id = "btnDelete" data-toggle="modal" data-target="#deleteModalHDN"><i class="far fa-trash-alt"></i> Xóa</button>&nbsp<button type="button" id = "btnDetailHDN" data-toggle="modal" data-target="#DetailModalCTHDN" class="btn btn-primary"><i class="fas fa-info-circle"></i> Xem chi tiết</button>'
+            }]
+        });
+        $('#formCreateHDN').validate({
+            onfocusout: false,
+            onkeyup: false,
+            onclick: false,
+            rules: {
+                "soPn": {
+                    required: true,
+                    number: true,
+                    maxlength: 255
+                }
+            }
+        });
+        $('#formCTHDN').validate({
+            onfocusout: false,
+            onkeyup: false,
+            onclick: false,
+            rules: {
+                "soPn": {
+                    required: true,
+                    number: true,
+                    maxlength: 255
+                }, "maSanPham": {
+                    required: true,
+                    number: true,
+                    maxlength: 255
+                }, "soLuongNhap": {
+                    required: true,
+                    number: true,
+                    maxlength: 255
+                }
+            }
+        });
+        $('#submitCreateHDN').click(() => {
+            if ($('#formCreateHDN').valid()) {
+                let form = document.getElementById("formCreateHDN");
+                let data = new FormData(form);
+                $('#submitCreateHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+                $.ajax({
+                    type: 'post',
+                    url: "/create-hdn",
+                    enctype: 'multipart/form-data',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 1000000,
+                    success: result => {
+                        alert(result);
+                        tablehdn.ajax.reload();
+                        $('#create-hdn').modal('hide');
+                        $('#submitCreateHDN').html('Lưu thay đổi');
+                    }, error: () => {
+                        alert("Thêm phiếu nhập thất bại!");
+                        $('#submitCreateHDN').html('Lưu thay đổi');
+                    }
+                })
+            }
+        });
+        // $('#create-productTitle1').click(() => {
+        //     clearDataHDN();
+        // });
+        // function clearDataHDN() {
+        //     $("#ma-pn-create").val("");
+        //     $("#ngay-nhap-create").val("");
+        // }
+        // $('#dongcreatehdn').click(() => {
+        //     clearDataHDN();
+        // });
+        function bindDataHDN(data) {
+            $("#ma-pn-edit").val(data[0]);
+            $("#ngay-nhap-edit").val(data[1]);
+        }
+        $('#dataTable tbody').on('click', '#btnDelete', function () {
+            var data = tablehdn.row($(this).parents('tr')).data();
+            bindDataHDN(data);
+        });
+        $('#dataTable tbody').on('click', '#btnEditHDN', function () {
+            var data = tablehdn.row($(this).parents('tr')).data();
+            bindDataHDN(data);
+        });
+        $('#submitDeleteHDN').click(() => {
+            let form = document.getElementById("formEditHDN");
+            let data = new FormData(form);
+            $('#submitDeleteHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/delete-hdn",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    tablehdn.ajax.reload();
+                    $('#deleteModalHDN').modal('hide');
+                    $('#submitDeleteHDN').html('Lưu thay đổi');
+                }, error: () => {
+                    alert("xóa phiếu nhập thất bại!");
+                    $('#submitDeleteHDN').html('Lưu thay đổi');
+                }
+            })
+        });
+        $('#submitChangesHDN').click(() => {
+            let form = document.getElementById("formEditHDN");
+            let data = new FormData(form);
+            $('#submitChangesHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/edit-hdn",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    tablehdn.ajax.reload();
+                    $('#editModalHDN').modal('hide');
+                    $('#submitChangesHDN').html('Lưu thay đổi');
+                }, error: () => {
+                    alert("Sửa phiếu nhập thất bại!");
+                    $('#submitChangesHDN').html('Lưu thay đổi');
+                }
+            })
+        });
+        var tablecthdn = $('#dataTableCTHoaDonNhap').DataTable({
+            "ajax": "/datatable-cthdn?sopn="+sopn1,
+            "columnDefs": [{
+                "targets": -1,
+                "data": null,
+                "defaultContent": '<button type="button" id = "btnDetailCTHDN" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>'
+            }, {
+                "visible": false, "targets": 0
+            }]
+        });
+        $('#dataTable tbody').on('click', '#btnDetailHDN', function () {
+            var data = tablehdn.row($(this).parents('tr')).data();
+            $("#so-pn-ct").val(data[0]);
+            //tablecthdn.search(data[0]).draw();
+            sopn1=data[0];
+            tablecthdn.ajax.url('/datatable-cthdn?sopn='+data[0]).load();
+        });
+        $('#dataTableCTHoaDonNhap tbody').on('click', '#btnDetailCTHDN', function () {
+            var data = tablecthdn.row($(this).parents('tr')).data();
+            $('#Id').val(data[0]);
+            $("#masp-ct").val(data[2]);
+            $("#slnhap-ct").val(data[3]);
+            $("#dgn-ct").val(data[4]);
+        });
+        function clearDataCTHDN() {
+            $("#slnhap-ct").val("");
+            $("#dgn-ct").val("");
+        }
+        $("#SubmitResetCRUD").click(() => {
+            clearDataCTHDN();
+        });
+        $('#SubmitCreateCTHDN').click(() => {
+            if ($('#formCTHDN').valid()) {
+                let formData = new FormData();
+                formData.append("soPn", $("#so-pn-ct").val());
+                formData.append("maSanPham", $("#masp-ct").val());
+                formData.append("soLuongNhap", $("#slnhap-ct").val());
+                formData.append("donGiaNhap", $("#dgn-ct").val());
+                $('#SubmitCreateCTHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+                $.ajax({
+                    type: 'post',
+                    url: "/create-cthdn",
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 1000000,
+                    success: result => {
+                        alert(result);
+                        tablecthdn.ajax.reload();
+                        $('#SubmitCreateCTHDN').html('Thêm');
+                    }, error: () => {
+                        alert("Thêm chi tiết phiếu nhập thất bại!");
+                        $('#SubmitCreateCTHDN').html('Thêm');
+                    }
+                })
+            }
+        });
+        $('#SubmitEditCTHDN').click(() => {
+            if ($('#formCTHDN').valid()) {
+            let formData = new FormData();
+            formData.append("ID", $("#Id").val());
+            formData.append("soPn", $("#so-pn-ct").val());
+            formData.append("maSanPham", $("#masp-ct").val());
+            formData.append("soLuongNhap", $("#slnhap-ct").val());
+            formData.append("donGiaNhap", $("#dgn-ct").val());
+            $('#SubmitEditCTHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/edit-cthdn",
+                enctype: 'multipart/form-data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    tablecthdn.ajax.reload();
+                    $('#SubmitEditCTHDN').html('Sửa');
+                }, error: () => {
+                    alert("Sửa chi tiết phiếu nhập thất bại!");
+                    $('#SubmitEditCTHDN').html('Sửa');
+                }
+            })
+            }
+        });
+        
+        $('#SubmitDeleteCTHDN').click(() => {
+            let formData = new FormData();
+            formData.append("ID", $("#Id").val());
+            formData.append("soPn", $("#so-pn-ct").val());
+            formData.append("maSanPham", $("#masp-ct").val());
+            formData.append("soLuongNhap", $("#slnhap-ct").val());
+            formData.append("donGiaNhap", $("#dgn-ct").val());
+            $('#SubmitDeleteCTHDN').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/delete-cthdn",
+                enctype: 'multipart/form-data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    tablecthdn.ajax.reload();
+                    $('#SubmitDeleteCTHDN').html('Xóa');
+                }, error: () => {
+                    alert("Xóa chi tiết phiếu nhập thất bại!");
+                    $('#SubmitDeleteCTHDN').html('Xóa');
+                }
+            })
+        });
+    })
+</script>
+</body>
+
+</html>

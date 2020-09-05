@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <link rel="stylesheet" th:inline="text" href="../static/css/chitietsp.css" th:href="@{css/chitietsp.css}">
+    <link rel="stylesheet" th:inline="text" href="../static/css/base-css.css" th:href="@{css/base-css.css}">
+</head>
+
+<body>
+    <header style="background-color: white;">
+        <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+    </header>
+
+    <section class="news" style="background-color: #f3f3f3;">
+        <div class="container">
+            <div class="link-sumary font-medium">
+                <div class="d-flex">
+                    <p> <a href="/">Trang chủ </a> </p>
+                    <span> <i class="fas fa-angle-right"></i> </span>
+                    <p> <a href="#"> PHÒNG KHÁCH </a> </p>
+                    <span> <i class="fas fa-angle-right"></i> </span>
+                    <p> <a href="#"> Chi tiết sản phẩm </a> </p>
+                </div>
+            </div>
+        </div>
+
+        <div class=" container product-detail" style="background-color: white; ">
+            <h3 class="font-ultra">Bàn Uống Nước</h3>
+            <div class="row " style="margin-bottom: 50px;">
+                <div class="col-lg-8">
+                    <div class="tab-content font-medium list-img row">
+                        <figure id="anh1" class="tab-pane fade in active show col-12">
+                            <img src="../static/images/ct1.jpg" th:src="@{images/ct1.jpg}" alt="" width="100%">
+                        </figure>
+                        <figure id="anh2" class="tab-pane fade col-12">
+                            <img src="../static/images/ct1-1.png" th:src="@{images/ct1-1.png}" alt="" width="100%">
+                        </figure>
+                        <figure id="anh3" class="tab-pane fade col-12">
+                            <img src="../static/images/ct1.jpg" th:src="@{images/ct1.jpg}" alt="" width="100%">
+                        </figure>
+                        <figure id="anh4" class="tab-pane fade col-12">
+                            <img src="../static/images/ct1-1.png" th:src="@{images/ct1-1.png}" alt="" width="100%">
+                        </figure>
+
+                    </div>
+
+                    <div class="row check-img">
+                        <div class="col-lg-3 col-3 active"><img data-toggle="tab" width="100%" href="#anh1" src="../static/images/ct3.jpg" th:src="@{images/ct3.jpg}"></img>
+                        </div>
+                        <div class="col-lg-3 col-3"><img data-toggle="tab" width="100%" href="#anh2" src="../static/images/ct5.jpg" th:src="@{images/ct5.jpg}"></img>
+                        </div>
+                        <div class="col-lg-3 col-3"><img data-toggle="tab" width="100%" href="#anh3" src="../static/images/ct4.jpg" th:src="@{images/ct4.jpg}"></img>
+                        </div>
+                        <div class="col-lg-3 col-3"><img data-toggle="tab" width="100%" href="#anh4" src="../static/images/ct3.jpg" th:src="@{images/ct3.jpg}"></img>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 font-medium">
+                    <p class="material"> Chất liệu </p>
+                    <div class="d-flex material">
+                        <button> Gỗ sồi </button>
+                        <button> Gỗ lim </button>
+                        <button> Gỗ mít </button>
+                    </div>
+                    <div class="price">
+                        <p class="old"> 255555 </p>
+                        <p class="new"> 200000 </p>
+                    </div>
+                    <div class="certify d-flex justify-content-start align-items-center">
+                        <i class="fas fa-shield-alt mr-2"></i>
+
+                        <p>Bảo hành sản phẩm lên đến 12 tháng</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-info font-medium">
+                <ul class="nav nav-tabs">
+                    <li class="active show"><a data-toggle="tab" href="#dactrung">Đặc trưng</a></li>
+                    <li><a data-toggle="tab" href="#thongso">Thông số</a></li>
+                    <li><a data-toggle="tab" href="#baoquan">Bảo quản</a></li>
+                    <li><a data-toggle="tab" href="#baohanh">Bảo hành</a></li>
+                    <li><a data-toggle="tab" href="#camket">Cam kết</a></li>
+                </ul>
+
+                <div class="tab-content font-medium ">
+                    <div id="dactrung" class="tab-pane fade in active show">
+                        <p style="color:#343659">BÀN UỐNG NƯỚC - BÀN TRÀ CAO CẤP CHO CHUNG CƯ <br> Bàn uống nước hay bàn trà là một trong những sản phẩm không thể thiếu trong mọi ngôi nhà hay trong các căn hộ chung cư, việc lựa chọn bàn uống nước, bàn trà sao cho phù hợp với
+                            không gian , màu sắc phòng khách mà không ảnh hưởng tới bố cục của căn phòng vô cùng quan trọng. Trong bài viết này, xưởng mộc Hoàng Hoan sẽ cùng các bạn tham khảo một số lưu ý khi lựa chọn bàn uống nước cho căn phòng của mình.
+                            <br> 1/ Lựa chọn phù hợp với không gian Một chiếc bàn uống nước được coi là phù hợp và hoàn hảo, điều đầu tiên cần phải phù hợp với không gian của căn phòng nơi nó được trưng bày, nghĩa là chiếc bàn không được quá to hoặc không
+                            quá nhỏ mà cần hài hòa với các vật dụng xung quanh chiếc bàn đó. Điều đó có nghĩa gia chủ cần tính toán, cân nhắc rất nhiều trong trường hợp sử dụng các sản phẩm bàn uống nước được sản xuất có sẵn trên thị trường, để khi mua
+                            về chiếc bàn có thể hài hòa với căn phòng. <br> 2/ Lựa chọn bàn uống nước phù hợp với màu sắc căn phòng. Ngoài yếu tố phù hợp với không gian căn phòng, màu sắc của chiếc bàn trà cũng cần được quan tâm để không quá nổi trội
+                            và gây chói mắt cho gia chủ cũng như bạn bè khi đến chơi nhà. Những chiếc bàn trà nên có màu sắc ấm áp, nhẹ nhàng để tạo cho không gian khi thưởng thức trà được thoải mái nhất. <br> 3/ Lựa chọn thiết kế bàn trà phù hợp. Với
+                            một căn phòng mang phong cách hiện đại, việc sử dụng một chiếc bàn uống nước cổ điển, truyền thống sẽ làm hỏng không gian và gây nhức mắt. Chính vì vậy cần quan tâm rất lớn cho thiết kế bàn trà khi lựa chọn cho căn phòng của
+                            gia đình để mọi vật hài hòa trong không gian đó nhất. Những lưu ý tưởng trừng như cơ bản ai cũng biết như trên thực ra đã có rất nhiều người đã và đang gặp phải và đã phải thay thế những chiếc bàn uống nước khác cho căn phòng
+                            để chữa cháy những lựa chọn trước đó của chính mình. Một lựa chọn an toàn cho mọi gia đình khi lựa chọn các vật dụng nội thất như bàn uống nước, cầu thang, cánh cửa, giường gỗ và tủ gỗ,... là lựa chọn các xưởng sản xuất uy
+                            tín, nơi có thể cùng cấp những lời tư vấn phù hợp nhất.
+                        </p>
+                    </div>
+                    <div id="thongso" class="tab-pane fade">
+                        <p style="color:#343659">alo
+                        </p>
+                    </div>
+                    <div id="baoquan" class="tab-pane fade">
+                        <p style="color:#343659">- Bàn uống nước gỗ nhập khẩu - Phong cách hình học tối giản - Kệ bên trong có kích thước hoàn hảo cho tạp chí, đế lót ly và các phụ kiện phòng khách khác - Có thể được sử dụng như một bàn TV thấp - Kệ mỏng hoàn hảo để chứa một
+                            hộp hàng đầu hoặc đầu phát blu-ray - Làm bằng gỗ Sheesham cao cấp - Không cần lắp ráp.
+                        </p>
+                    </div>
+                    <div id="baohanh" class="tab-pane fade">
+                        <p style="color:#343659">- Bảo hành sản phẩm lên đến 12 tháng
+                        </p>
+                    </div>
+                    <div id="camket" class="tab-pane fade">
+                        <p style="color:#343659">Hoàng Hoan cam kết đổi trả Lắp ráp miễn phí Tư vấn nhiệt tình </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class=" container product-detail" style="background-color: white; margin-top: 80px;">
+            <div class="d-flex justify-content-between box-title">
+                <h4 class="font-ultra"> Sản phẩm tương tự </h4>
+            </div>
+
+            <div class="row font-medium">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product" style="background-color: white;">
+                        <div class="img">
+                            <img src="../static/images/sanpham-1.png" th:src="@{images/sanpham-1.png} " alt="Kệ để đồ" class="img-fluid">
+                        </div>
+                        <div class="info">
+                            <p class="name"> <a href="" title="Kệ để đồ"> Kệ để đồ</a> </p>
+                            <p class="vote">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </p>
+                            <p class="desc"> (4 ngăn ,Gỗ lim)</p>
+
+                            <p class="price"> <span>12999000</span> VNĐ </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product" style="background-color: white;">
+                        <div class="img">
+                            <img src="../static/images/sanpham-2.png" th:src="@{images/sanpham-2.png} " alt="Kệ để đồ" class="img-fluid">
+                        </div>
+                        <div class="info">
+                            <p class="name"> <a href="" title="Kệ để đồ"> Kệ để đồ</a> </p>
+                            <p class="vote">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </p>
+                            <p class="desc"> (4 ngăn ,Gỗ lim)</p>
+
+                            <p class="price"> <span>12999000</span> VNĐ </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product" style="background-color: white;">
+                        <div class="img">
+                            <img src="../static/images/sanpham-3.png" th:src="@{images/sanpham-3.png} " alt="Kệ để đồ" class="img-fluid">
+                        </div>
+                        <div class="info">
+                            <p class="name"> <a href="" title="Kệ để đồ"> Kệ để đồ</a> </p>
+                            <p class="vote">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </p>
+                            <p class="desc"> (4 ngăn ,Gỗ lim)</p>
+
+                            <p class="price"> <span>12999000</span> VNĐ </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product" style="background-color: white;">
+                        <div class="img">
+                            <img src="../static/images/sanpham-4.jpg" th:src="@{images/sanpham-4.jpg} " alt="Kệ để đồ" class="img-fluid">
+                        </div>
+                        <div class="info">
+                            <p class="name"> <a href="" title="Kệ để đồ"> Kệ để đồ</a> </p>
+                            <p class="vote">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </p>
+                            <p class="desc"> (4 ngăn ,Gỗ lim)</p>
+
+                            <p class="price"> <span>12999000</span> VNĐ </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color: #f3f3f3; height: 50px;">
+
+        </div>
+    </section>
+
+    <footer>
+        <th:block th:insert="~{fragments :: base-footer} "></th:block>
+        <th:block th:insert="~{fragments :: base-js} "></th:block>
+    </footer>
+
+
+</body>
+
+</html>

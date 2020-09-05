@@ -27,6 +27,7 @@ import com.devmaster.entity.SanPham;
 import com.devmaster.entity.UserRole;
 import com.devmaster.exception.BankTransactionException;
 import com.devmaster.formdata.FormDataProduct;
+import com.devmaster.model.Top4Product;
 
 @Repository
 @Transactional
@@ -178,7 +179,50 @@ public class SanPhamDao {
 		query4.executeUpdate();
 		return "Xóa sản phẩm thành công!";
 	}
-	
+	public List<Top4Product> lstTop4Product(long id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Top4Product> data = new ArrayList<Top4Product>();
+		String sql = " Select sp from SanPham sp join sp.loaiSanPham where sp.loaiSanPham.maLoai = "+id;
+		Query<SanPham> query = session.createQuery(sql, SanPham.class).setMaxResults(4);
+		query.getResultList().forEach(e->{
+			Top4Product product = new Top4Product();
+			product.setId(e.getMaSanPham());
+			product.setName(e.getTenSanPham());
+			product.setProductType(id);
+			switch ((int)e.getDanhGia()) {
+			case 1:
+				product.setRate(Arrays.asList(1));
+				break;
+			case 2:
+				product.setRate(Arrays.asList(1,2));
+				break;
+			case 3:
+				product.setRate(Arrays.asList(1,2,3));
+				break;
+			case 4:
+				product.setRate(Arrays.asList(1,2,3,4));
+				break;
+			default:
+				product.setRate(Arrays.asList(1,2,3,4,5));
+				break;
+			}
+			String sql2 = "Select a from Anh a where a.maSanPham = "+e.getMaSanPham();
+			Query<Anh> query2 = session.createQuery(sql2, Anh.class).setMaxResults(1);
+			String pathImage = query2.getSingleResult().getTenAnh().split("/")[6];
+			product.setPathImage(pathImage);
+			product.setDescription(e.getMoTa());
+			String sql4 = "Select ctn from CTHoaDonNhap ctn where ctn.sanPham.maSanPham ="+e.getMaSanPham()+" order by id desc";
+			Query<CTHoaDonNhap> query3 = session.createQuery(sql4, CTHoaDonNhap.class);
+			try {
+				double price = query3.getResultList().get(0).getDonGiaNhap() + (query3.getResultList().get(0).getDonGiaNhap()*e.getPhanTram())/100;
+				product.setPrice(String.valueOf(price)+ " VNĐ");
+			} catch (Exception e2) {
+				product.setPrice("0 VNĐ");
+			}
+			data.add(product);
+		});
+		return data;
+	}
 	public void saveFile(MultipartFile file) throws IOException {
 		String uploadFilePath =   "src/main/resources/static/files/sanpham/" + file.getOriginalFilename();
 		Path path = Paths.get(uploadFilePath);

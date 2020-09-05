@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <th:block th:fragment="base-css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" th:inline="text" href="../static/css/doitac.css" th:href="@{css/doitac.css}">
+    </th:block>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+    <section class="banner">
+        <img height="200em" src="../static/images/doitac1.png" alt=""
+            th:src="@{images/doitac1.png}">
+    </section>
+    <div style="background-color: #f3f3f3;">
+        <div class="container content">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <img src="../static/images/dt1.jpg" th:src="@{images/dt1.jpg}" alt="Vinpearl" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7 ">
+                        <span class="font-ultra" style="color:#bd945f; font-size: 18px; margin-bottom: 8px; margin-bottom: 20px;">CÔNG TY CỔ PHẦN VINPEARL</span>
+                        <p class="font-medium" style="font-size: 12px; letter-spacing: 1px;">Vinpearl là một thương hiệu dịch vụ du lịch nghỉ dưỡng - giải trí lớn nhất Việt<br>Nam. Vinpearl
+                            sở hữu chuỗi khách sạn, resort và trung tâm hội nghị đẳng<br>cấp 5 sao, các khu vui chơi giải trí 
+                            quốc tế tọa lạc tại những danh thắng du<br>lịch nổi tiếng nhất Việt Nam.</p>
+                        </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <img src="../static/images/dt2.jpg" th:src="@{images/dt2.jpg}" alt="Mường Thanh" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7">
+                        <span class="font-ultra" style="color:#bd945f; font-size: 18px; margin-bottom: 8px;margin-bottom: 20px;">TẬP ĐOÀN KHÁCH SẠN MƯƠNG THANH</span>
+                        <p class="font-medium" style="font-size: 12px; letter-spacing: 1px;">Tại Mương Thanh, chúng tôi mời bạn cùng khởi hành chuyến đi tìm về<br>không gian thanh thản
+                        chứa đựng những nét văn hóa mang đậm tinh thần<br>bản sắc Việt, nơi con người gắn kết và thân ái gửi trao nhau tình cảm
+                        chân<br>thành.</p>
+                        </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <img src="../static/images/dt3.jpg" th:src="@{images/dt3.jpg}" alt="Sheraton" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7">
+                        <span class="font-ultra" style="color:#bd945f; font-size: 18px; margin-bottom: 8px; margin-bottom: 20px;">SHERATON HANOI  HOTEL</span>
+                        <p class="font-medium" style="font-size: 12px; letter-spacing: 1px;">Situated on the shores of Hanoi's West Lake and surounded by its many<br>local
+                        attractions, Sheraton Hanoi Hotel is just a quick drive to the the busting<br>downtown of Hanoi City. 
+                        Explore the nearby Old Quarter, home to Hoan<br>Kiem Lake, Hanoi Opera House and exceptional boutiques.</p>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <img src="../static/images/dt4.jpg" th:src="@{images/dt4.jpg}" alt="The Coffeehouse" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7">
+                        <span class="font-ultra" style="color:#bd945f; font-size: 18px; margin-bottom: 8px; margin-bottom: 20px;">THE COFFEE HOUSE</span>
+                        <p class="font-medium" style="font-size: 12px; letter-spacing: 1px;">Tại The Coffee House, chúng tôi luôn trân trọng những câu chuyện và đề<br>cao giá 
+                        trị Kết nối con người. Chúng tôi mong muốn The Coffee House sẽ<br>trở thành "Nhà cà phê", nơi mọi người xích
+                        lại gần nhau và tìm thấy niềm<br>vui, sự sẻ chia thân tình bên những tách cà phê đượm hương, chất lượng.</p>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <img src="../static/images/dt5.jpg" th:src="@{images/dt5.jpg}" alt="Marvella" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7">
+                        <span class="font-ultra" style="color:#bd945f; font-size: 18px; margin-bottom: 8px; margin-bottom: 20px;">MARVELLA HOTEL NHA TRANG </span>
+                        <p class="font-medium" style="font-size: 12px; letter-spacing: 1px;">Marvella một thương hiệu khách sạn 4 sao mới xây dựng theo phong cách<br>tân cổ điển, sang trọng</p>
+                    </div>
+                </div>
+            
+            
+        </div>
+    </div>
+
+    
+    <th:block th:insert="~{fragments :: base-footer}"></th:block>
+    <th:block th:insert="~{fragments :: base-js}"></th:block>
+</body>
+</html>

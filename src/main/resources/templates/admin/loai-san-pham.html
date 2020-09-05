@@ -5,14 +5,12 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
-        information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
-            DataTables documentation</a>.</p>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#create-type"><i
+                    class="fas fa-plus"></i> Thêm loại sản phẩm mới</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -49,6 +47,105 @@
 <!-- /.container-fluid -->
 
 <th:block th:replace="~{/admin/fragments :: bottom-of-content}"></th:block>
+
+<!-- Modal thêm loại sản phẩm -->
+<div class="modal fade" id="create-type" tabindex="-1" role="dialog" aria-labelledby="createtypeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createtypeTitle">Thêm loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" id="formCreateType">
+                
+                    <div class="form-group">
+                        <label for="ma-loai-create">Mã loại sản phẩm</label>
+                        <input type="text" class="form-control" id="ma-loai-create" name="maLoai"
+                            placeholder="Mã loại sản phẩm tự tạo" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="ten-loai-create">Tên loại sản phẩm</label>
+                        <input type="text" class="form-control" id="ten-loai-create" name="tenLoai"
+                            placeholder="Nhập tên loại sản phẩm">
+                        <div id="ten-loai-create-valid"></div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitCreateType">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal sửa loại sản phẩm -->
+<div class="modal fade" id="edit-type" tabindex="-1" role="dialog" aria-labelledby="edittypeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edittypeTitle">Sửa loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" id="formeditType">
+                
+                    <div class="form-group">
+                        <label for="ma-loai-edit">Mã loại sản phẩm</label>
+                        <input type="text" class="form-control" id="ma-loai-edit" name="maLoai"
+                            placeholder="Mã loại sản phẩm tự tạo" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="ten-loai-create">Tên loại sản phẩm</label>
+                        <input type="text" class="form-control" id="ten-loai-edit" name="tenLoai"
+                            placeholder="Nhập tên loại sản phẩm">
+                        <div id="ten-loai-edit-valid"></div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submiteditType">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xóa loại sản phẩm -->
+<div class="modal fade" id="deletetype" tabindex="-1" role="dialog" aria-labelledby="deletetype"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận xóa loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Lưu ý: khi bạn xóa loại sản phẩm này thì đồng nghĩa bạn sẽ xóa những bản ghi liên quan đến loại sản phẩm này
+                !<br>
+                Bạn có muốn xóa hóa loại sản phẩm này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btndeleteType">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 <script>
     $(() => {
         var table = $('#dataTable').DataTable({
@@ -56,10 +153,135 @@
             "columnDefs": [{
                 "targets": -1,
                 "data": null,
-                "defaultContent": '<button type="button" class="btn btn-danger" id = "btnDelete" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i> Xóa</button>'
+                "defaultContent": '<button type="button" class="btn btn-danger" id = "btnDelete" data-toggle="modal" data-target="#deletetype"><i class="far fa-trash-alt"></i> Xóa</button>&nbsp;<button type="button" id = "btnEdit" data-toggle="modal" data-target="#edit-type" class="btn btn-primary"><i class="far fa-edit"></i> Sửa</button>'
             }]
         });
+        function bindData(data) {
+        $("#ma-loai-edit").val(data[0]);
+        $("#ten-loai-edit").val(data[1]);
+        }
+
+
+        $('#dataTable').on('click', '#btnEdit', function () {
+            var data = table.row($(this).parents('tr')).data();
+            bindData(data);
+            });
+
+
+        $('#formCreateType').validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "tenLoai": {
+                        required: true,
+                        maxlength: 255
+                }
+            }
+        });
+
+    
+        $('#formeditType').validate({
+            onfocusout: false,
+		    onkeyup: false,
+		    onclick: false,
+            rules: {
+                "tenLoai": {
+                    required: true,
+                    maxlength: 255
+                }
+            }
+        });
+
+        
+    $('#submitCreateType').click(() => {
+        if($('#formCreateType').valid()){
+            let form = document.getElementById("formCreateType");
+            let data = new FormData(form);
+            $('#submitCreateType').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/create-type",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                // cache: false,
+                // timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    $('#create-type').modal('hide');
+                    $('#submitCreateType').html('Lưu thay đổi');
+                    table.ajax.reload();
+                }, error: () => {
+                    alert("Thêm loại sản phẩm thất bại!");
+                    $('#submitCreateType').html('Lưu thay đổi');
+                }
+            })
+        }
+    });
+
+    $('#submiteditType').click(() => {
+        if($('#formeditType').valid()){
+            let form = document.getElementById("formeditType");
+            let data = new FormData(form);
+            $('#submiteditType').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/edit-type",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                // cache: false,
+                // timeout: 1000000,
+                success: result => {
+                    alert(result);
+                    $('#edit-type').modal('hide');
+                    $('#submiteditType').html('Lưu thay đổi');
+                    table.ajax.reload()
+
+                }, error: () => {
+                    alert("Thêm loại sản phẩm thất bại!");
+                    $('#submiteditType').html('Lưu thay đổi');
+                }
+            })
+        }
+    });
+
+
+        $('#dataTable').on('click', '#btnDelete', function () {
+            var data = table.row($(this).parents('tr')).data();
+            bindData(data);
+            });
+
+    $('#btndeleteType').click(() => {
+            let form = document.getElementById("formeditType");
+            let data = new FormData(form);
+            $('#deleteType').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+            $.ajax({
+                type: 'post',
+                url: "/delete-type",
+                enctype: 'multipart/form-data',
+                data: data,
+                processData: false,
+                contentType: false,
+                // cache: false,
+                // timeout: 1000000,
+                success: result => {
+                    alert("Xóa loại sản phẩm thành công!");
+                    $('#deleteType').html('Lưu thay đổi');
+                    table.ajax.reload();
+                }, error: () => {
+                    alert("Xóa loại sản phẩm thất bại!");
+                    $('#deleteType').html('Lưu thay đổi');
+                }
+            })
+    });
+
     })
+
+   
 </script>
 </body>
 
