@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.content{
+    background-color: #f3f3f3;
+    padding-top: 25px;
+}
+body > div.content > div > div > div > span a{
+    color: #bd945f;
+}
+.chitietsp{
+    background-color: white;
+}
+.nav-tabs {
+    border-bottom: 0px;
+}
+.material {
+    font-size: 1em;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+body > div.content > div > div.chitietsp > div > div.col-md-4 > div > button{
+    width: 48%;
+    padding: .6em .5em .4em .5em;
+    border: 2px solid #959595;
+    background: transparent;
+    cursor: pointer;
+}
+body > div.content > div > div.chitietsp > div > div.col-md-4 > div > button:hover{
+    border: 2px solid #bd945f;
+}
+.old{
+    text-decoration: line-through;
+    margin-bottom: 0em;
+}
+.new{
+    color: #bd945f;
+    font-size: 22px;
+}
+body > div.content > div > div.chitietsp > div > div.col-md-4 > div.certify{
+    border: 1px solid #959595;
+    padding: 0px 14px 0px 14px;
+}
+body > div.content > div > div.chitietsp > div:nth-child(3) > ul{
+    /* padding-bottom: 4px ;  */
+    border-bottom: 2px solid #bd945f;
+}
+body > div.content > div > div.chitietsp > div.mieuta > ul > li{
+    border-right: 2px solid #bd945f;
+    margin-bottom: 5px; 
+}
+body > div.content > div > div.chitietsp > div.mieuta > ul > li:nth-child(5){
+    border-right: none;
+}
+body > div.content > div > div.chitietsp > div.mieuta > ul > li > a{
+    padding: 0 1em;
+    border-radius: 0;
+    border: none;
+    color: #bd945f;
+    text-decoration: none;
+    position: relative;
+}
+body > div.content > div > div.chitietsp > div.mieuta > ul > li > a.active{
+    color: black;
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
+}
+.phong{
+    background-color: white; 
+    padding: 30px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.loaiphong{
+    border-bottom: 3px solid #bd945f;
+    display: inline-block !important;
+    color: #2c2e53;
+    margin-bottom: 20px;
+}
+body > div.content > div > div.phong > div > div > img{
+    width: 100%;
+}
+body > div.content > div > div.phong > div > div > p{
+    margin-bottom: 0px;
+}
+body > div.content > div > div.phong > div > div > p:nth-child(2){
+    font-family: Gotham-ultra;
+    margin-top: 15px;
+    color: #2c2e53;
+}
+body > div.content > div > div.phong > div > div > p > small{
+    font-family: Gotham-thin;
+}
+body > div.content > div > div.phong > div > div > span{
+    color: #bd945f;
+}
+body > div.content > div > div.phong > div > div > p:nth-child(2) > a{
+    color: #2c2e53;
+    text-decoration: none;
+}
+@media only screen and (max-width : 768px){
+    body > div.content > div > div.chitietsp > div > div.col-md-4 > p{
+        margin-top: 15px;
+    }
+}

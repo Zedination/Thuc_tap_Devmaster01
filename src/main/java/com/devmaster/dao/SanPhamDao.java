@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +29,7 @@ import com.devmaster.entity.UserRole;
 import com.devmaster.exception.BankTransactionException;
 import com.devmaster.formdata.FormDataProduct;
 import com.devmaster.model.PhanTrangObj;
+import com.devmaster.model.ProductInfo;
 import com.devmaster.model.Top4Product;
 
 @Repository
@@ -220,9 +222,12 @@ public class SanPhamDao {
 			Query<CTHoaDonNhap> query3 = session.createQuery(sql4, CTHoaDonNhap.class);
 			try {
 				double price = query3.getResultList().get(0).getDonGiaNhap() + (query3.getResultList().get(0).getDonGiaNhap()*e.getPhanTram())/100;
-				product.setPrice(String.valueOf(price)+ " VNĐ");
+				DecimalFormat formatter = new DecimalFormat("###,###,###.##");
+				product.setPrice(String.valueOf(price));
+				product.setFormattedPrice(formatter.format(price).toString());
 			} catch (Exception e2) {
-				product.setPrice("0 VNĐ");
+				product.setPrice("0");
+				product.setFormattedPrice("0");
 			}
 			data.add(product);
 		});
@@ -268,13 +273,56 @@ public class SanPhamDao {
 			Query<CTHoaDonNhap> query3 = session.createQuery(sql4, CTHoaDonNhap.class);
 			try {
 				double price = query3.getResultList().get(0).getDonGiaNhap() + (query3.getResultList().get(0).getDonGiaNhap()*e.getPhanTram())/100;
+				DecimalFormat formatter = new DecimalFormat("###,###,###.##");
 				product.setPrice(String.valueOf(price));
+				product.setFormattedPrice(formatter.format(price).toString());
 			} catch (Exception e2) {
 				product.setPrice("0");
+				product.setFormattedPrice("0");
 			}
 			data.add(product);
 		});
 		return data;
+	}
+	public ProductInfo getProductInfo(long maSanPham) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = " Select sp from SanPham sp where sp.maSanPham = "+maSanPham;
+		Query<SanPham> query = session.createQuery(sql, SanPham.class);
+		SanPham product = query.getSingleResult();
+		ProductInfo info = new ProductInfo();
+		info.setMaSanPham(product.getMaSanPham());
+		info.setTenSanPham(product.getTenSanPham());
+		info.setDacTrung(product.getDacTrung());
+		info.setThongSo(product.getThongSo());
+		String sql2 = "Select ctn from CTHoaDonNhap ctn where ctn.sanPham.maSanPham ="+product.getMaSanPham()+" order by id desc";
+		Query<CTHoaDonNhap> query2 = session.createQuery(sql2, CTHoaDonNhap.class);
+		try {
+			double price = query2.getResultList().get(0).getDonGiaNhap() + (query2.getResultList().get(0).getDonGiaNhap()*product.getPhanTram())/100;
+			DecimalFormat formatter = new DecimalFormat("###,###,###.##");
+			info.setPrice(formatter.format(price).toString());
+			info.setNewPrice(String.valueOf(price*0.9));
+		} catch (Exception e2) {
+			info.setPrice(String.valueOf(0));
+			info.setNewPrice("0");
+		}
+		
+		List<Anh> anhs = new ArrayList<Anh>();
+		String sql3 = "Select a from Anh a where a.maSanPham = "+maSanPham;
+		Query<Anh> query3 = session.createQuery(sql3, Anh.class).setMaxResults(4);
+		anhs = query3.getResultList();
+		List<String> anhString = new ArrayList<String>();
+		anhs.forEach(e->{
+			try {
+				String pathImage = e.getTenAnh().split("/")[6];
+				anhString.add(pathImage);
+			} catch (Exception e2) {
+				anhString.add("pb-2.jpg");
+			}
+		});
+		info.setAnhs(anhString);
+		info.setMaLoai(String.valueOf(product.getLoaiSanPham().getMaLoai()));
+		info.setTenLoai(product.getLoaiSanPham().getTenLoai());
+		return info;
 	}
 	public void saveFile(MultipartFile file) throws IOException {
 		String uploadFilePath =   "src/main/resources/static/files/sanpham/" + file.getOriginalFilename();

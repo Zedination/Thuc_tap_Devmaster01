@@ -13,4 +13,5 @@ public class Top4Product {
 	private List<Integer> rate;
 	private String description;
 	private String price;
+	private String formattedPrice;
 }

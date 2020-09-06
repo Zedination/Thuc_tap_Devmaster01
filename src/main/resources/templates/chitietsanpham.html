@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:insert="~{fragments :: base-css}"></th:block>
+    <link rel="stylesheet" th:inline="text" href="../static/css/chitietsanpham.css" th:href="@{css/chitietsanpham.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments :: base-navigation}"></th:block>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex" style="margin-left: 45px; margin-bottom: 15px; font-size: 14px;">
+                    <span class="font-medium"><a href="/">Trang chủ</a></span>&nbsp;<i class="fas fa-angle-right"
+                        style="margin: 4px;"></i>&nbsp;
+                    <span class="font-medium"><a th:href="@{'tat-ca-san-pham?maLoai='+${product.maLoai}}" th:utext = "${product.tenLoai}">Phòng khách</a></span>&nbsp;<i class="fas fa-angle-right"
+                        style="margin: 4px;"></i>&nbsp;
+                    <span class="font-medium"><a th:href="@{'chi-tiet-san-pham?maSanPham='+${product.maSanPham}}" th:utext = "${product.tenSanPham}">Bàn uống nước</a></span>
+                </div>
+            </div>
+            <div class="chitietsp" style="padding: 30px;">
+                <h5 class="font-medium" style="font-size: 25px; margin-bottom: 15px;" th:utext="${product.tenSanPham}">Bàn uống nước</h5>
+                <div class="row" style="margin-bottom: 25px;">
+                    <div class="col-md-8">
+                        <div class="tab-content row" style="margin-bottom: 15px;">
+                            <th:block th:each="anh, state : ${product.anhs}">
+                                <th:block th:if="@{${state.count}=='1'}">
+                                    <div th:id="anh+${state.count}" class="tab-pane active col-md-12">
+                                        <img th:src="@{'files/sanpham/'+${anh}}" alt="" width="100%">
+                                    </div>
+                                </th:block>
+                                <th:block th:if="@{${state.count}!='1'}">
+                                    <div th:id="anh+${state.count}" class="tab-pane col-md-12">
+                                        <img th:src="@{'files/sanpham/'+${anh}}" alt="" width="100%">
+                                    </div>
+                                </th:block>
+                            </th:block>
+                        </div>
+                        <ul class="nav nav-tabs row">
+                            <th:block th:each="anh, state : ${product.anhs}">
+                                <li class="active col-md-3 col-3">
+                                    <a th:href="@{'#anh'+${state.count}}" data-toggle="tab"><img width="100%"
+                                        th:src="@{'files/sanpham/'+${anh}}"></img></a>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="font-medium">Chất liệu</p>
+                        <div class="d-flex material">
+                            <button class="font-medium">Gỗ sồi</button>
+                            <button class="font-medium">Gỗ lim</button>
+                        </div>
+                        <div class="price" style="margin-top: 25px;">
+                            <p class="old font-medium" th:utext = "${product.price+' VNĐ'}">12.090.000 VNĐ</p>
+                            <p class="new font-medium" th:utext = "${product.newPrice+' VNĐ'}">9.999.000 VNĐ</p>
+                        </div>
+                        <div class="certify d-flex justify-content-start align-items-center">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            <p style="margin-top: 17px; font-size: 15px;" class="font-medium">Bảo hành sản phẩm lên đến
+                                12 tháng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mieuta">
+                    <ul class="nav nav-tabs font-medium">
+                        <li><a data-toggle="tab" href="#dactrung">Đặc trưng</a></li>
+                        <li><a data-toggle="tab" href="#thongso">Thông số</a></li>
+                        <li><a data-toggle="tab" href="#baoquan">Bảo quản</a></li>
+                        <li><a data-toggle="tab" href="#baohanh">Bảo hành</a></li>
+                        <li><a data-toggle="tab" href="#camket">Cam kết</a></li>
+                    </ul>
+    
+                    <div class="tab-content font-medium " style="margin-top: 20px; font-size: 14px;">
+                        <div id="dactrung"  class="tab-pane fade in active show">
+                            <p th:utext = "${product.dacTrung}" style="color:#343659">- Bàn nhập khẩu</p>
+                        </div>
+                        <div id="thongso" class="tab-pane fade">
+                            <p th:utext = "${product.thongSo}" style="color:#343659">- alo
+                            </p>
+                        </div>
+                        <div id="baoquan" class="tab-pane fade">
+                            <p style="color:#343659">- Bàn uống nước gỗ nhập khẩu.</p>
+                        </div>
+                        <div id="baohanh" class="tab-pane fade">
+                            <p style="color:#343659">- Bảo hành sản phẩm lên đến 12 tháng</p>
+                        </div>
+                        <div id="camket" class="tab-pane fade">
+                            <p style="color:#343659">- Hoàng Hoan cam kết đổi trả Lắp ráp miễn phí Tư vấn nhiệt tình </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="phong">
+                <h5 class="loaiphong font-ultra">SẢN PHẨM TƯƠNG TỰ</h5>
+                <div class="row sanpham" style="text-align: center;">
+                    <th:block th:each="sp : ${listGroupProduct.top4}">
+                        <div class="col-md-3">
+                            <img th:src="@{'files/sanpham/'+${sp.pathImage}}" alt="">
+                            <p><a th:href="@{'chi-tiet-san-pham?maSanPham='+${sp.id}}" th:utext="${sp.name}">BÀN UỐNG NƯỚC</a></p>
+                            <th:block th:each="star : ${sp.rate}">
+                                <span><i class="fas fa-star"></i></span>
+                            </th:block>
+                            <p><small th:utext="${sp.description}">(Size vừa, nâu đậm)</small></p>
+                            <h6 th:utext="${sp.price+' VNĐ'}">8.999.000 VNĐ</h6>
+                         </div>
+                    </th:block>
+              </div>
+        </div>
+    </div>
+    <th:block th:insert="~{fragments :: base-footer}"></th:block>
+    <th:block th:insert="~{fragments :: base-js}"></th:block>
+</body>
+
+</html>

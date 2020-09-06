@@ -56,12 +56,12 @@
                   <th:block th:each="product : ${data.top4}">
                      <div class="col-md-3">
                         <img th:src="@{'files/sanpham/'+${product.pathImage}}" alt="">
-                        <p><a href="#" th:text="${product.name}">BÀN UỐNG NƯỚC</a></p>
+                        <p><a th:href="@{'/chi-tiet-san-pham?maSanPham='+${product.id}}" th:text="${product.name}">BÀN UỐNG NƯỚC</a></p>
                         <th:block th:each="rate : ${product.rate}">
                            <span><i class="fas fa-star"></i></span>
                         </th:block>
                         <p><small th:text="${product.description}">(Size vừa, nâu đậm)</small></p>
-                        <h6 th:utext = "${product.price}">8.999.000 VNĐ</h6>
+                        <h6 th:utext = "${product.formattedPrice+' VNĐ'}">8.999.000 VNĐ</h6>
                      </div>
                   </th:block>
                </div>

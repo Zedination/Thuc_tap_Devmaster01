@@ -17,6 +17,7 @@ import com.devmaster.dao.SanPhamDao;
 import com.devmaster.entity.LoaiSanPham;
 import com.devmaster.model.ModelProduct;
 import com.devmaster.model.PhanTrangInfo;
+import com.devmaster.model.ProductInfo;
 import com.devmaster.model.Top4Product;
 
 @Controller
@@ -175,8 +176,17 @@ public class BaseController {
 	}
 
 	@GetMapping("/chi-tiet-san-pham")
-	public String get_chi_tiet_san_pham(Model model) {
+	public String get_chi_tiet_san_pham(Model model, @RequestParam("maSanPham") long maSanPham) {
+		ProductInfo info = this.sanPhamDao.getProductInfo(maSanPham);
+		model.addAttribute("product",info);
 		model.addAttribute("title", "Chi tiết sản phẩm");
-		return "chitietsp";
+		ModelProduct data = new ModelProduct();
+		List<LoaiSanPham> lst = loaiSanPhamDao.getLoaiSP();
+		model.addAttribute("listLoaiSanPham", lst);
+		data.setMaLoai(info.getMaLoai());
+		data.setTenLoai(info.getTenLoai());
+		data.setTop4(this.sanPhamDao.lstTop4Product(Long.valueOf(info.getMaLoai())));
+		model.addAttribute("listGroupProduct", data);
+		return "chitietsanpham";
 	}
 }
