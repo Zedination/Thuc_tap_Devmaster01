@@ -22,20 +22,9 @@
     height: 450px;
 }
 
-.news .main-content {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #bd945f;
-    padding: 1.5em;
-}
-
-.news .main-content a {
-    color: #fff;
-}
 
 .news li {
-    margin-bottom: 16px;
+    margin-bottom: 30px;
 }
 
 .news li img {
@@ -101,4 +90,16 @@
 
 .link-sumary span {
     margin: -.17rem .5rem;
+}
+
+#bai-lien-quan>h5{
+    border-bottom: 4px solid #bd945f; 
+    padding-left: 0px;
+    padding-right: 0px ;
+    width: 122px;
+}
+
+#bai-lien-quan>p{
+    font-size: 12px; 
+    letter-spacing: 1px;
 }

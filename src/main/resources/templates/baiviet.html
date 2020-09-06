@@ -21,95 +21,50 @@
                 <div class="d-flex">
                     <p> <a href="/">Trang chủ </a> </p>
                     <span> <i class="fas fa-angle-right"></i> </span>
-                    <p> <a href="#"> Chi tiết bài viết </a> </p>
+                    <p> <a href="/tin-tuc?p=1"> Tin tức </a> </p>
                 </div>
             </div>
         </div>
         <div class=" container " style="background-color: white; ">
-            <div class="row font-medium ">
-                <h5 class="font-ultra col-lg-7" style="margin-top: 50px; color: #bd945f;">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHÒNG NGỦ ĐẸP</h5>
-                <h5 class="font-ultra col-lg-5" style="margin-top: 50px;">Bài viết mới</h5>
-            </div>
             <div class="row font-medium " style="margin-bottom: 20px; ">
 
-                <div class="col-lg-7 " style="margin-bottom: 20px; margin-top: 10px;position: relative;">
+                <div class="col-lg-7 " style="margin-bottom: 20px; margin-top: 10px">
                     <!-- <h5 class="font-ultra">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHÒNG NGỦ ĐẸP</h5> -->
-
+                    <h5 class="font-ultra" th:utext= "${tinTuc.title}" style="text-transform: uppercase; margin-top: 50px; color: #bd945f;">NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHÒNG NGỦ ĐẸP</h5>
+                    <th:block th:utext = "${tinTuc.content}"></th:block>
+                    <!-- <p class="font-medium"></p>
                     <div class="box" style="margin-top: 20px;">
                         <div class="img ">
                             <img src="../static/images/tintuc-6.png " th:src="@{images/tintuc-6.png} " class="w-100 ">
                         </div>
-                        <div class="main-content ">
-                            <p class="title ">
-                                <a href="# " class="font-medium ">
-                                    TUYỆT CHIÊU THIẾT KẾ CHUNG CƯ MINI 2 PHÒNG NGỦ SIÊU ĐẸP
-                                </a>
-                            </p>
-                            <div class="desc ">
-                                <p>Độ tuổi khởi nghiệp và tự lập ngày càng trẻ hóa trong xã hội hiện đại thời nay, thế nên việc “thiết kế căn hộ chung cư mini 2 phòng ngủ”</p>
-
-                            </div>
-                        </div>
-                    </div>
+                        
+                    </div> -->
 
                 </div>
-                <div class="col-lg-5 " style="margin-bottom: 20px;margin-top: 10px;position: relative; ">
+                <div class="col-lg-5 " id="bai-lien-quan" style="margin-bottom: 20px;margin-top: 10px;">
                     <!-- <h5 class="font-ultra">Bài viết mới</h5> -->
-
-                    <ul style="margin-top: 20px;">
-                        <li class="d-flex ">
-                            <div class="img ">
-                                <img src="../static/images/tintuc-1.jpg " th:src="@{images/tintuc-1.jpg} ">
-                            </div>
-                            <div class="content ">
-                                <p class="title ">
-                                    <a href="# ">
-                                        25+ MẪU GIƯỜNG NGỦ HỘC KÉO THÔNG MINH CHO CĂN PHÒNG BẠN
-                                    </a>
-                                </p>
-                                <div class="desc sub-news-content ">
-                                    <p>Sự thật là chúng ta dành hết 1/3 cuộc đời chỉ để ngủ, vì thế việc tạo được một giấc ngủ ngon là một.</p>
-
+                    <h5 class="font-ultra col-lg-5" style="margin-top: 50px ; margin-bottom: 40px; ">Bài viết mới</h5>
+                    <ul>
+                        <th:block th:each="news : ${top3News}">
+                            <li class="d-flex ">
+                                <div class="img ">
+                                    <img th:src="@{${news.pathImage}}">
                                 </div>
-                            </div>
-                        </li>
-                        <li class="d-flex ">
-                            <div class="img ">
-                                <img src="../static/images/tintuc-2.jpg " th:src="@{images/tintuc-2.jpg} ">
-                            </div>
-                            <div class="content ">
-                                <p class="title ">
-                                    <a href="# ">
-                                        NGẤT NGÂY VỚI TOP 10 MẪU NỘI THẤT CHUNG CƯ 1 PHÒNG NGỦ ĐẸP
-                                    </a>
-                                </p>
-                                <div class="desc sub-news-content ">
-                                    <p>Sự thật là chúng ta dành hết 1/3 cuộc đời chỉ để ngủ, vì thế việc tạo được một giấc ngủ ngon là một ...</p>
-
+                                <div class="content ">
+                                    <p class="title ">
+                                        <a style="text-transform: uppercase;" th:href="@{'bai-viet?id='+${news.id}}" th:utext = "${news.title}">
+                                            25+ MẪU GIƯỜNG NGỦ HỘC KÉO THÔNG MINH CHO CĂN PHÒNG BẠN
+                                        </a>
+                                    </p>
+                                    <div class="desc sub-news-content ">
+                                        <p th:utext = "${news.content}">Sự thật là chúng ta dành hết 1/3 cuộc đời chỉ để ngủ, vì thế việc tạo được một giấc ngủ ngon là một.</p>
+    
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="d-flex ">
-                            <div class="img ">
-                                <img src="../static/images/tintuc-3.jpg " th:src="@{images/tintuc-3.jpg} ">
-                            </div>
-                            <div class="content ">
-                                <p class="title ">
-                                    <a href="# ">
-                                        TUYỆT CHIÊU THIẾT KẾ CHUNG CƯ MINI 2 PHÒNG NGỦ SIÊU ĐẸP
-                                    </a>
-                                </p>
-                                <div class="desc sub-news-content ">
-                                    <p>Sự thật là chúng ta dành hết 1/3 cuộc đời chỉ để ngủ, vì thế việc tạo được một giấc ngủ ngon là một ...</p>
-
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        </th:block>
                     </ul>
-                    <div>
-                        <a href="# " class="see-more "> Xem thêm <i
-                                class="fas fa-long-arrow-alt-right "></i></a>
-                    </div>
+    
                 </div>
             </div>
         </div>

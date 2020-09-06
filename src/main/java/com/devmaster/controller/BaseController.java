@@ -6,6 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.devmaster.dao.LoaiSanPhamDao;
 import com.devmaster.dao.SanPhamDao;
+import com.devmaster.dao.TinTucDao;
 import com.devmaster.entity.LoaiSanPham;
 import com.devmaster.model.ModelProduct;
+import com.devmaster.model.NewsInfo;
 import com.devmaster.model.PhanTrangInfo;
 import com.devmaster.model.ProductInfo;
 import com.devmaster.model.Top4Product;
@@ -29,6 +32,9 @@ public class BaseController {
 	@Autowired
 	private LoaiSanPhamDao loaiSanPhamDao;
 
+	@Autowired
+	private TinTucDao tinTucDao;
+	
 	@GetMapping("/fragments")
 	public String get_fragments() {
 		return "fragments";
@@ -53,8 +59,22 @@ public class BaseController {
 	}
 
 	@GetMapping("/tin-tuc")
-	public String get_tin_tuc(Model model) {
+	public String get_tin_tuc(Model model, @RequestParam(name = "p", defaultValue = "1") int position) {
 		model.addAttribute("title", "Tin tức");
+		List<NewsInfo> data = tinTucDao.getListNews();
+		long skiper = 0;
+		for(int i = 1;i<position;i++) {
+			skiper=skiper+12;
+		}
+		long count = data.size();
+		List<NewsInfo> afterFilter = data.stream().skip(skiper).limit(12).collect(Collectors.toList());
+		model.addAttribute("listTinTuc", afterFilter);
+		model.addAttribute("activePosition", position);
+		List<Integer> lstPages = new ArrayList<Integer>();
+		for(int i = 0; i<((int) count/12)+1;i++) {
+			lstPages.add(1);
+		}
+		model.addAttribute("lstPages", lstPages);
 		return "tin-tuc";
 	}
 
@@ -170,8 +190,11 @@ public class BaseController {
 	}
 
 	@GetMapping("/bai-viet")
-	public String get_bai_viet(Model model) {
+	public String get_bai_viet(Model model, @RequestParam("id") long id) {
 		model.addAttribute("title", "Bài viết");
+		model.addAttribute("tinTuc", this.tinTucDao.getNewsById(id));
+		List<NewsInfo> top3News = this.tinTucDao.getListNews().stream().sorted((s1,s2)->(int) (s2.getId() - s1.getId())).limit(3).collect(Collectors.toList());
+		model.addAttribute("top3News",top3News);
 		return "baiviet";
 	}
 

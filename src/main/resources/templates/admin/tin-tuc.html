@@ -142,7 +142,6 @@
                 obj.title = $('#titleNews').val();
                 obj.content = CKEDITOR.instances.editor1.getData();
                 obj.id = $('#idNews').val();
-                alert(obj.id);
                 $.ajax({
                     url: '/update-news',
                     type: 'post',
@@ -173,6 +172,7 @@
                     $('#idNews').val('');
                     $('#btnCreateNews').prop('disabled', false);
                     $('#btnUpdateNews').prop('disabled', true);
+                    $('#deleteModal').modal('hide');
                 }, error: () => {
                     alert("Xóa tin thất bại! Vui lòng thử lại.");
                 }
