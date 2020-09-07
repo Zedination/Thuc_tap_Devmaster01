@@ -25,12 +25,18 @@ import com.devmaster.entity.CTHoaDonNhap;
 import com.devmaster.entity.Datatables;
 import com.devmaster.entity.LoaiSanPham;
 import com.devmaster.entity.SanPham;
+import com.devmaster.entity.Token;
 import com.devmaster.entity.UserRole;
 import com.devmaster.exception.BankTransactionException;
 import com.devmaster.formdata.FormDataProduct;
 import com.devmaster.model.PhanTrangObj;
 import com.devmaster.model.ProductInfo;
 import com.devmaster.model.Top4Product;
+import com.google.firebase.messaging.BatchResponse;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.MulticastMessage;
 
 @Repository
 @Transactional
@@ -82,7 +88,7 @@ public class SanPhamDao {
 		return data;
 	}
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = BankTransactionException.class)
-	public String createProduct(FormDataProduct product) throws IOException {
+	public String createProduct(FormDataProduct product) throws IOException, FirebaseMessagingException {
 		Session session = this.sessionFactory.getCurrentSession();
 		SanPham newProduct = new SanPham();
 		newProduct.setTenSanPham(product.getTenSanPham());
@@ -106,8 +112,7 @@ public class SanPhamDao {
 		} catch (Exception e) {
 			
 		}
-		
-		return "Lưu sản phẩm thành công!";
+		return id.toString();
 	}
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = BankTransactionException.class)
 	public String updateProduct(FormDataProduct updateForProduct) {
