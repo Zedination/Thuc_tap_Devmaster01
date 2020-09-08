@@ -57,6 +57,11 @@ public class BaseController {
 		model.addAttribute("title", "Đăng nhập quản trị");
 		return "login";
 	}
+	@GetMapping("/logoutSuccessful")
+	public String get_logout(Model model) {
+		model.addAttribute("title", "Đăng nhập quản trị");
+		return "login";
+	}
 
 	@GetMapping("/tin-tuc")
 	public String get_tin_tuc(Model model, @RequestParam(name = "p", defaultValue = "1") int position) {

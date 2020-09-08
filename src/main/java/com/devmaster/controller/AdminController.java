@@ -32,7 +32,8 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin-index")
-	public String admin_index() {
+	public String admin_index(Model model) {
+		model.addAttribute("title", "Trang chủ");
 		return "admin/index";
 	}
 
