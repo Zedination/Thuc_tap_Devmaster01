@@ -238,6 +238,56 @@ public class SanPhamDao {
 		});
 		return data;
 	}
+	public List<Top4Product> lstTop8Product() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Top4Product> data = new ArrayList<Top4Product>();
+		String sql = " Select sp from SanPham sp order by danhGia desc";
+		Query<SanPham> query = session.createQuery(sql, SanPham.class).setMaxResults(8);
+		query.getResultList().forEach(e->{
+			Top4Product product = new Top4Product();
+			product.setId(e.getMaSanPham());
+			product.setName(e.getTenSanPham());
+			switch ((int)e.getDanhGia()) {
+			case 1:
+				product.setRate(Arrays.asList(1));
+				break;
+			case 2:
+				product.setRate(Arrays.asList(1,2));
+				break;
+			case 3:
+				product.setRate(Arrays.asList(1,2,3));
+				break;
+			case 4:
+				product.setRate(Arrays.asList(1,2,3,4));
+				break;
+			default:
+				product.setRate(Arrays.asList(1,2,3,4,5));
+				break;
+			}
+			String sql2 = "Select a from Anh a where a.maSanPham = "+e.getMaSanPham();
+			Query<Anh> query2 = session.createQuery(sql2, Anh.class).setMaxResults(1);
+			try {
+				String pathImage = query2.getSingleResult().getTenAnh().split("/")[6];
+				product.setPathImage(pathImage);
+			} catch (Exception e2) {
+				product.setPathImage("pb-2.jpg");
+			}
+			product.setDescription(e.getMoTa());
+			String sql4 = "Select ctn from CTHoaDonNhap ctn where ctn.sanPham.maSanPham ="+e.getMaSanPham()+" order by id desc";
+			Query<CTHoaDonNhap> query3 = session.createQuery(sql4, CTHoaDonNhap.class);
+			try {
+				double price = query3.getResultList().get(0).getDonGiaNhap() + (query3.getResultList().get(0).getDonGiaNhap()*e.getPhanTram())/100;
+				DecimalFormat formatter = new DecimalFormat("###,###,###.##");
+				product.setPrice(String.valueOf(price));
+				product.setFormattedPrice(formatter.format(price).toString());
+			} catch (Exception e2) {
+				product.setPrice("0");
+				product.setFormattedPrice("0");
+			}
+			data.add(product);
+		});
+		return data;
+	}
 	public List<Top4Product> listAllProductByType(long id){
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Top4Product> data = new ArrayList<Top4Product>();

@@ -191,6 +191,18 @@ public class BaseController {
 	@GetMapping(path = { "/", "/index" })
 	public String index(Model model) {
 		model.addAttribute("title", "Trang chủ");
+		List<Top4Product> list1 = this.sanPhamDao.lstTop8Product().stream().limit(4).collect(Collectors.toList());
+		List<Top4Product> list2 = this.sanPhamDao.lstTop8Product().stream().skip(4).limit(4).collect(Collectors.toList());
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
+		List<NewsInfo> top3News = this.tinTucDao.getListNews().stream().sorted((s1,s2)->(int) (s2.getId() - s1.getId())).skip(1).limit(3).collect(Collectors.toList());
+		model.addAttribute("top3News",top3News);
+		try {
+			NewsInfo firstNews = this.tinTucDao.getListNews().stream().sorted((s1,s2)->(int) (s2.getId() - s1.getId())).limit(1).collect(Collectors.toList()).get(0);
+			model.addAttribute("firstNews",firstNews);
+		} catch (Exception e) {
+			model.addAttribute("firstNews","");
+		}
 		return "home";
 	}
 
